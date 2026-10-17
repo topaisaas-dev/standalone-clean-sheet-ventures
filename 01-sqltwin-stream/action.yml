@@ -1,0 +1,44 @@
+name: 'SQLTwin Deterministic Database Anonymizer'
+author: 'TopAI Sovereign Studio'
+description: 'Stream-anonymize PostgreSQL, MySQL and SQLite dumps in CI/CD without breaking FOREIGN KEY joins or UNIQUE constraints.'
+branding:
+  icon: 'database'
+  color: 'blue'
+
+inputs:
+  input_file:
+    description: 'Path to raw SQL dump file (e.g. dump.sql)'
+    required: true
+  output_file:
+    description: 'Target path for anonymized SQL dump file (e.g. clean.sql)'
+    required: false
+    default: 'anonymized_dump.sql'
+  seed_salt:
+    description: 'Secret HMAC salt for deterministic pseudonymization'
+    required: false
+    default: 'sqltwin-ci-default-salt'
+  license_key:
+    description: 'Offline Ed25519 Commercial License Key for dumps > 10,000 rows'
+    required: false
+    default: ''
+
+outputs:
+  anonymized_file:
+    description: 'Path to anonymized SQL dump file'
+    value: ${{ inputs.output_file }}
+  rows_processed:
+    description: 'Total number of SQL table rows anonymized'
+    value: ${{ steps.run_sqltwin.outputs.rows_processed }}
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Run SQLTwin Streaming Anonymizer
+      id: run_sqltwin
+      shell: bash
+      run: |
+        node "${{ github.action_path }}/bin/cli.js" \
+          --input "${{ inputs.input_file }}" \
+          --output "${{ inputs.output_file }}" \
+          --salt "${{ inputs.seed_salt }}" \
+          --license "${{ inputs.license_key }}"

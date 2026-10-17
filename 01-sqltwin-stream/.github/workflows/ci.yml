@@ -1,0 +1,26 @@
+name: SQLTwin Stream CI & Marketplace Verification
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test-deterministic-engine:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 24
+        uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+
+      - name: Run Deterministic FPE, Ed25519 & Streaming COPY Tests
+        run: node --experimental-strip-types --test tests/sqltwin.test.js
+
+      - name: Smoke Test CLI Streaming Pipe
+        run: |
+          echo "INSERT INTO users (id, email) VALUES (1, 'ceo@acme-bank.com');" | node --experimental-strip-types bin/cli.js | grep -v "ceo@acme-bank.com"

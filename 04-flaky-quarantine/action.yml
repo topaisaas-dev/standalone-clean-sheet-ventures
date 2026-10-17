@@ -1,0 +1,33 @@
+name: 'Flaky Quarantine'
+description: 'Mathematical Markov-Chain Flaky Test Detector and Automated CI Isolator for Playwright, Jest, Vitest, and Pytest.'
+author: 'TopAI Sovereign Studio'
+branding:
+  icon: 'shield'
+  color: 'purple'
+
+inputs:
+  reports:
+    description: 'Comma-separated paths to JUnit XML test reports (e.g. "junit-run1.xml,junit-run2.xml")'
+    required: true
+  scan_path:
+    description: 'Path to test source files to scan for anti-patterns'
+    required: false
+    default: ''
+  output:
+    description: 'Path where the quarantine manifest should be saved'
+    required: false
+    default: '.flaky-quarantine.json'
+  license_key:
+    description: 'Offline Ed25519 commercial license key'
+    required: false
+    default: ''
+
+outputs:
+  quarantined_count:
+    description: 'Number of flaky tests quarantined'
+  playwright_grep_invert:
+    description: 'Regex pattern for Playwright --grep-invert argument'
+
+runs:
+  using: 'node20'
+  main: 'bin/cli.js'

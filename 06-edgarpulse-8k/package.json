@@ -1,0 +1,38 @@
+{
+  "name": "@topaisaas/edgarpulse-8k",
+  "version": "1.0.0",
+  "description": "Real-time streaming parser and quantitative insider conviction signal engine for SEC EDGAR Form 4 & Form 8-K filings.",
+  "type": "module",
+  "main": "src/signal_engine.ts",
+  "bin": {
+    "edgarpulse": "bin/cli.js"
+  },
+  "files": [
+    "bin",
+    "src",
+    "README.md",
+    "LICENSE"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "start": "node bin/cli.js",
+    "test": "node --test tests/edgarpulse.test.js"
+  },
+  "keywords": [
+    "sec-edgar",
+    "form-4",
+    "form-8k",
+    "insider-trading",
+    "quant-trading",
+    "trading-signals",
+    "alpha-generation",
+    "open-market-purchases",
+    "cluster-buying",
+    "algo-trading",
+    "financial-markets"
+  ],
+  "author": "TopAI Sovereign Studio",
+  "license": "Apache-2.0"
+}

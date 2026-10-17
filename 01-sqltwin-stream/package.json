@@ -1,0 +1,40 @@
+{
+  "name": "@topaisaas/sqltwin-stream",
+  "version": "1.0.0",
+  "description": "Deterministic, streaming SQL dump anonymizer (PostgreSQL, MySQL, SQLite) preserving 100% of FOREIGN KEY joins and UNIQUE constraints with zero memory overhead.",
+  "type": "module",
+  "main": "bin/cli.js",
+  "bin": {
+    "sqltwin": "bin/cli.js",
+    "sqltwin-stream": "bin/cli.js"
+  },
+  "files": [
+    "bin",
+    "src",
+    "README.md",
+    "action.yml",
+    "LICENSE"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "start": "node bin/cli.js",
+    "test": "node --test tests/sqltwin.test.js"
+  },
+  "keywords": [
+    "sql",
+    "postgresql",
+    "anonymizer",
+    "gdpr",
+    "hipaa",
+    "fpe",
+    "database-clone",
+    "streaming",
+    "ci-cd",
+    "test-database",
+    "foreign-keys"
+  ],
+  "author": "TopAI Sovereign Studio",
+  "license": "Apache-2.0"
+}

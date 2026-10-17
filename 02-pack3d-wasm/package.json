@@ -1,0 +1,39 @@
+{
+  "name": "@topaisaas/pack3d-wasm",
+  "version": "1.0.0",
+  "description": "Ultra-fast (<0.4ms) 3D Bin-Packing and Box Selection Engine for Shopify Functions and Logistics Pipelines using Extreme Point Heuristic and 6-Axis Rotation.",
+  "type": "module",
+  "main": "src/packer_3d.ts",
+  "bin": {
+    "pack3d": "bin/cli.js"
+  },
+  "files": [
+    "bin",
+    "src",
+    "README.md",
+    "LICENSE"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "start": "node bin/cli.js",
+    "test": "node --test tests/pack3d.test.js"
+  },
+  "keywords": [
+    "shopify-function",
+    "wasm",
+    "3d-bin-packing",
+    "box-packing",
+    "shipping-optimization",
+    "first-fit-decreasing",
+    "extreme-points",
+    "logistics",
+    "fedex",
+    "ups",
+    "dhl",
+    "dimensional-weight"
+  ],
+  "author": "TopAI Sovereign Studio",
+  "license": "Apache-2.0"
+}

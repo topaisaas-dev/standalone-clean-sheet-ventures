@@ -1,0 +1,12 @@
+{
+  "name": "@topaisaas/inflow-paywall",
+  "version": "1.0.0",
+  "description": "High-converting deterministic in-flow CI/CD paywall and emergency pass tollbooth for CLI developer tools.",
+  "type": "module",
+  "main": "src/inflow_paywall.ts",
+  "scripts": {
+    "test": "node --test tests/paywall.test.js"
+  },
+  "author": "TopAI Sovereign Studio",
+  "license": "Apache-2.0"
+}

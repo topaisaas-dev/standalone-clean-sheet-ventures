@@ -1,0 +1,39 @@
+{
+  "name": "@topaisaas/cidr-shield-mmdb",
+  "version": "1.0.0",
+  "description": "Zero-latency local binary IP threat database (Datacenter, Tor, VPN, Proxies) and Radix Trie LPM engine replacing MaxMind/IPinfo with $0.00 query cost.",
+  "type": "module",
+  "main": "src/binary_db.ts",
+  "bin": {
+    "cidr-shield": "bin/cli.js"
+  },
+  "files": [
+    "bin",
+    "src",
+    "README.md",
+    "LICENSE"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "start": "node bin/cli.js",
+    "test": "node --test tests/cidr_shield.test.js"
+  },
+  "keywords": [
+    "ip-lookup",
+    "radix-trie",
+    "patricia-trie",
+    "mmdb",
+    "maxmind-alternative",
+    "ipinfo-alternative",
+    "fraud-prevention",
+    "datacenter-ip",
+    "tor-exit-node",
+    "vpn-detection",
+    "cidr",
+    "longest-prefix-match"
+  ],
+  "author": "TopAI Sovereign Studio",
+  "license": "Apache-2.0"
+}
