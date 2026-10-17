@@ -1,0 +1,39 @@
+{
+  "name": "@topaisaas/dockerlean-wasm",
+  "version": "1.0.0",
+  "description": "Deterministic, air-gapped Dockerfile & OCI layer optimizer. Detects 12 bloat anti-patterns, cache invalidations, and security flaws in sub-50ms with zero Docker daemon dependency.",
+  "type": "module",
+  "main": "dist/index.js",
+  "bin": {
+    "dockerlean": "dist/cli.js",
+    "dockerlean-wasm": "dist/cli.js"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "action.yml",
+    "LICENSE"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "esbuild bin/cli.js --bundle --platform=node --format=esm --outfile=dist/cli.js && esbuild src/index.ts --bundle --platform=node --format=esm --outfile=dist/index.js",
+    "start": "node dist/cli.js",
+    "test": "node --test tests/dockerlean.test.js"
+  },
+  "keywords": [
+    "docker",
+    "dockerfile",
+    "container-optimization",
+    "devops",
+    "ci-cd",
+    "bloat-detector",
+    "multi-stage",
+    "layer-cache",
+    "finops",
+    "github-action"
+  ],
+  "author": "TopAI Sovereign Studio",
+  "license": "Apache-2.0"
+}

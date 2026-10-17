@@ -56,6 +56,28 @@
 - **Distribution** : PyPI, GitHub Topics `quant-trading` et `sec-edgar`.
 - **Monétisation** : 49 €/mois via Polar.sh ou micro-paiement HTTP 402 (x402).
 
+### 7. `07-agentpr-guard` (L'Inspecteur de PRs générées par IA)
+- **Thèse** : Auditeur déterministe de Pull Requests et pre-commit hook pour code généré par IA (Claude Code, Cursor, Devin). Bloque les dépendances hallucinées, le typosquatting et les fuites d'architecture.
+- **Moteur Algorithmique** : Parseur de diff unifié Git + heuristique de détection de typosquatting (Levenshtein) + vérificateur de frontières client/serveur.
+- **Distribution** : GitHub Actions Marketplace (`uses: topaisaas-dev/agentpr-guard@v1`) + CLI `npx @topaisaas/agentpr-guard`.
+- **Monétisation** : Gratuit jusqu'à 3 PRs/jour. Licence Team à $39/mois.
+
+### 8. `08-tokenprune-wasm` (Le Tailleur de Contexte AST Déterministe)
+- **Thèse** : Réducteur de tokens de prompt pour LLMs et agents de codage. Réduit de 50% à 70% la facture API en élaguant les corps de fonctions pour ne conserver que les interfaces et signatures de types.
+- **Moteur Algorithmique** : Parseur AST léger streaming avec écroulement d'implémentation `{ /* collapsed */ }`.
+- **Distribution** : CLI `npx @topaisaas/tokenprune-wasm` + outil MCP.
+- **Monétisation** : Gratuit pour 10 fichiers/run. Licence Pro à $29 one-time.
+
+### 9. `09-dockerlean-wasm` (L'Auditeur Statique de Dockerfile & OCI Bloat)
+- **Thèse** : Auditeur statique de légèreté et sécurité Dockerfile sans daemon Docker. Détecte 12 anti-patterns majeurs (APT cache non purgé, multi-stage manquant, root user).
+- **Moteur Algorithmique** : Parseur statique de directives OCI avec estimation de mégaoctets gaspillés par layer.
+- **Distribution** : GitHub Actions Marketplace (`uses: topaisaas-dev/dockerlean-wasm@v1`) + CLI `npx @topaisaas/dockerlean-wasm`.
+- **Monétisation** : Gratuit pour 2 Dockerfiles. Licence Pro à $29 one-time.
+
+### 10. `10-mcp-suite` (Le Serveur MCP Unifié TopAI Sovereign)
+- **Thèse** : Serveur Model Context Protocol unifié exposant l'ensemble des 9 micro-appliances directement dans Claude Desktop, Cursor et Windsurf.
+- **Distribution** : Registres Smithery.ai, Glama.ai, PulseMCP et `npx @topaisaas/mcp-suite`.
+
 ---
 
 ## ⚡ Live Polar.sh Commercial Product Registry
@@ -68,5 +90,9 @@
 | **04** | **Flaky Quarantine** | `8d6ecbdc-7be3-41a0-a108-29865b8898e4` | $29/month | [Checkout Flaky Quarantine](https://buy.polar.sh/polar_cl_iel9yWlONZUVA92iPTUR0WgdhRoWjYWCDtypa47534c) |
 | **05** | **TerraCost Blast** | `3fb1980f-938c-453f-80b0-9235340dadcb` | $49/mo or $149 Lifetime | [Checkout TerraCost](https://buy.polar.sh/polar_cl_bHsPkpJfvHmG9STDpIdNGVMLpSwVG6wHoQPTz3Fa7TY) |
 | **06** | **EdgarPulse 8-K** | `aafd4325-d55b-4087-9be2-c0be5fbc4144` | $49/month | [Checkout EdgarPulse](https://buy.polar.sh/polar_cl_6FsrpUqrkka6YEmbvDERxCuZ0jJxd3muVtvsB2wRGOR) |
+| **07** | **Agent-PR Guard** | *(Polar Product Pending)* | $39/month | [Checkout Agent-PR](https://buy.polar.sh/polar_cl_agentpr_placeholder) |
+| **08** | **TokenPrune Wasm** | *(Polar Product Pending)* | $29 One-Time | [Checkout TokenPrune](https://buy.polar.sh/polar_cl_tokenprune_placeholder) |
+| **09** | **DockerLean Wasm** | *(Polar Product Pending)* | $29 One-Time | [Checkout DockerLean](https://buy.polar.sh/polar_cl_dockerlean_placeholder) |
+
 
 

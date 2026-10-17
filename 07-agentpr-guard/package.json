@@ -1,0 +1,38 @@
+{
+  "name": "@topaisaas/agentpr-guard",
+  "version": "1.0.0",
+  "description": "Deterministic Pull Request auditor for AI-generated code. Detects hallucinated npm/pypi dependencies, architectural boundary breaches, and excessive AI slop in CI/CD.",
+  "type": "module",
+  "main": "dist/index.js",
+  "bin": {
+    "agentpr-guard": "dist/cli.js"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "action.yml",
+    "LICENSE"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "esbuild bin/cli.js --bundle --platform=node --format=esm --outfile=dist/cli.js && esbuild src/index.ts --bundle --platform=node --format=esm --outfile=dist/index.js",
+    "start": "node dist/cli.js",
+    "test": "node --test tests/agentpr_guard.test.js"
+  },
+  "keywords": [
+    "ai-agent",
+    "claude-code",
+    "cursor",
+    "pull-request",
+    "code-review",
+    "supply-chain",
+    "hallucination-detector",
+    "architecture-linter",
+    "ci-cd",
+    "github-action"
+  ],
+  "author": "TopAI Sovereign Studio",
+  "license": "Apache-2.0"
+}

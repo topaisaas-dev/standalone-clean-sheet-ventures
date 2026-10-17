@@ -1,0 +1,30 @@
+name: 'Agent-PR Guard'
+description: 'Deterministic Pull Request & Git Hook Auditor for AI-Generated Code (Claude Code, Cursor, Devin).'
+author: 'TopAI Sovereign Studio'
+branding:
+  icon: 'git-pull-request'
+  color: 'purple'
+
+inputs:
+  diff_file:
+    description: 'Path to git diff file (defaults to comparing HEAD against base branch)'
+    required: false
+    default: ''
+  fail_on_reject:
+    description: 'Fail CI job if integrity score < 75 or critical supply chain hallucination detected'
+    required: false
+    default: 'true'
+  license_key:
+    description: 'Offline Ed25519 commercial license key'
+    required: false
+    default: ''
+
+outputs:
+  integrity_score:
+    description: 'Integrity score from 0 to 100'
+  is_approved:
+    description: 'Whether the PR is approved for merge'
+
+runs:
+  using: 'node20'
+  main: 'dist/cli.js'

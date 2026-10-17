@@ -1,0 +1,30 @@
+name: 'DockerLean Wasm'
+description: 'Air-Gapped Dockerfile & OCI Container Bloat Auditor. Detects 12 build inefficiencies and security risks.'
+author: 'TopAI Sovereign Studio'
+branding:
+  icon: 'box'
+  color: 'blue'
+
+inputs:
+  dockerfile:
+    description: 'Path to Dockerfile'
+    required: false
+    default: 'Dockerfile'
+  fail_on_bloat:
+    description: 'Whether to fail CI if lean score < 70'
+    required: false
+    default: 'true'
+  license_key:
+    description: 'Offline Ed25519 commercial license key'
+    required: false
+    default: ''
+
+outputs:
+  lean_score:
+    description: 'Dockerfile lean score (0 to 100)'
+  wasted_mb:
+    description: 'Estimated megabytes wasted per image build'
+
+runs:
+  using: 'node20'
+  main: 'dist/cli.js'
