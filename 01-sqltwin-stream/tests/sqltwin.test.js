@@ -1,8 +1,6 @@
 import { test, describe } from 'node:test';
 import assert from 'node:assert/strict';
-import { DeterministicFpeEngine } from '../src/fpe_engine.ts';
-import { verifyOfflineLicenseKey } from '../src/license_verifier.ts';
-import { SqlStreamParser } from '../src/sql_stream_parser.ts';
+import { DeterministicFpeEngine, verifyOfflineLicenseKey, SqlStreamParser } from '../dist/index.js';
 
 describe('SQLTwin Standalone Clean-Sheet Venture Test Suite', () => {
 

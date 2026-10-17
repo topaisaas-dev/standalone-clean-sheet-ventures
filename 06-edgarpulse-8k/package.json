@@ -1,15 +1,14 @@
 {
   "name": "@topaisaas/edgarpulse-8k",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Real-time streaming parser and quantitative insider conviction signal engine for SEC EDGAR Form 4 & Form 8-K filings.",
   "type": "module",
-  "main": "src/signal_engine.ts",
+  "main": "dist/index.js",
   "bin": {
-    "edgarpulse": "bin/cli.js"
+    "edgarpulse": "dist/cli.js"
   },
   "files": [
-    "bin",
-    "src",
+    "dist",
     "README.md",
     "LICENSE"
   ],
@@ -17,7 +16,8 @@
     "access": "public"
   },
   "scripts": {
-    "start": "node bin/cli.js",
+    "build": "esbuild bin/cli.js --bundle --platform=node --format=esm --outfile=dist/cli.js && esbuild src/index.ts --bundle --platform=node --format=esm --outfile=dist/index.js",
+    "start": "node dist/cli.js",
     "test": "node --test tests/edgarpulse.test.js"
   },
   "keywords": [

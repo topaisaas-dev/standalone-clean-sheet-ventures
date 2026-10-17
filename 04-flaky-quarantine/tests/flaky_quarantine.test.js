@@ -1,10 +1,6 @@
 import { test, describe } from 'node:test';
 import assert from 'node:assert/strict';
-import { MarkovAnalyzer } from '../src/markov_analyzer.ts';
-import { AntiPatternScanner } from '../src/anti_pattern_scanner.ts';
-import { JUnitParser } from '../src/junit_parser.ts';
-import { QuarantineManager } from '../src/quarantine_manager.ts';
-import { verifyOfflineLicenseKey } from '../src/license_verifier.ts';
+import { MarkovAnalyzer, AntiPatternScanner, JUnitParser, QuarantineManager, verifyOfflineLicenseKey } from '../dist/index.js';
 
 describe('Flaky Quarantine Standalone Clean-Sheet Venture Test Suite', () => {
 

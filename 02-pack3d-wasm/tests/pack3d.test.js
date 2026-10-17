@@ -1,8 +1,6 @@
 import { test, describe } from 'node:test';
 import assert from 'node:assert/strict';
-import { Packer3D } from '../src/packer_3d.ts';
-import { runShopifyPackFunction, DEFAULT_SHOPIFY_BOX_CATALOG } from '../src/shopify_function.ts';
-import { verifyOfflineLicenseKey } from '../src/license_verifier.ts';
+import { Packer3D, runShopifyPackFunction, DEFAULT_SHOPIFY_BOX_CATALOG, verifyOfflineLicenseKey } from '../dist/index.js';
 
 describe('Pack3D Wasm Standalone Clean-Sheet Venture Test Suite', () => {
 

@@ -1,15 +1,14 @@
 {
   "name": "@topaisaas/pack3d-wasm",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Ultra-fast (<0.4ms) 3D Bin-Packing and Box Selection Engine for Shopify Functions and Logistics Pipelines using Extreme Point Heuristic and 6-Axis Rotation.",
   "type": "module",
-  "main": "src/packer_3d.ts",
+  "main": "dist/index.js",
   "bin": {
-    "pack3d": "bin/cli.js"
+    "pack3d": "dist/cli.js"
   },
   "files": [
-    "bin",
-    "src",
+    "dist",
     "README.md",
     "LICENSE"
   ],
@@ -17,7 +16,8 @@
     "access": "public"
   },
   "scripts": {
-    "start": "node bin/cli.js",
+    "build": "esbuild bin/cli.js --bundle --platform=node --format=esm --outfile=dist/cli.js && esbuild src/index.ts --bundle --platform=node --format=esm --outfile=dist/index.js",
+    "start": "node dist/cli.js",
     "test": "node --test tests/pack3d.test.js"
   },
   "keywords": [

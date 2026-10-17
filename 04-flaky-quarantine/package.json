@@ -1,15 +1,14 @@
 {
   "name": "@topaisaas/flaky-quarantine",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Mathematical Markov-chain flaky test detector and automated CI quarantine action for Playwright, Jest, Vitest, and Pytest.",
   "type": "module",
-  "main": "src/quarantine_manager.ts",
+  "main": "dist/index.js",
   "bin": {
-    "flaky-quarantine": "bin/cli.js"
+    "flaky-quarantine": "dist/cli.js"
   },
   "files": [
-    "bin",
-    "src",
+    "dist",
     "README.md",
     "action.yml",
     "LICENSE"
@@ -18,7 +17,8 @@
     "access": "public"
   },
   "scripts": {
-    "start": "node bin/cli.js",
+    "build": "esbuild bin/cli.js --bundle --platform=node --format=esm --outfile=dist/cli.js && esbuild src/index.ts --bundle --platform=node --format=esm --outfile=dist/index.js",
+    "start": "node dist/cli.js",
     "test": "node --test tests/flaky_quarantine.test.js"
   },
   "keywords": [

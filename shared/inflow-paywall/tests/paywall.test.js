@@ -1,6 +1,6 @@
 import { test, describe } from 'node:test';
 import assert from 'node:assert/strict';
-import { InflowPaywall } from '../src/inflow_paywall.ts';
+import { InflowPaywall } from '../dist/index.js';
 
 describe('In-Flow Paywall Engine Test Suite', () => {
 

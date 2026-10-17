@@ -1,10 +1,19 @@
 {
   "name": "@topaisaas/inflow-paywall",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "High-converting deterministic in-flow CI/CD paywall and emergency pass tollbooth for CLI developer tools.",
   "type": "module",
-  "main": "src/inflow_paywall.ts",
+  "main": "dist/index.js",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
+    "build": "esbuild src/index.ts --bundle --platform=node --format=esm --outfile=dist/index.js",
     "test": "node --test tests/paywall.test.js"
   },
   "author": "TopAI Sovereign Studio",

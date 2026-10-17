@@ -1,9 +1,6 @@
 import { test, describe } from 'node:test';
 import assert from 'node:assert/strict';
-import { IpUtils } from '../src/ip_utils.ts';
-import { RadixTrie } from '../src/radix_trie.ts';
-import { CidrShieldDatabase, BUILTIN_IP_DATASETS } from '../src/binary_db.ts';
-import { verifyOfflineLicenseKey } from '../src/license_verifier.ts';
+import { IpUtils, RadixTrie, CidrShieldDatabase, BUILTIN_IP_DATASETS, verifyOfflineLicenseKey } from '../dist/index.js';
 
 describe('CIDR Shield MMDB Standalone Clean-Sheet Venture Test Suite', () => {
 

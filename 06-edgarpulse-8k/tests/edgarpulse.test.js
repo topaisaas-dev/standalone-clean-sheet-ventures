@@ -1,9 +1,6 @@
 import { test, describe } from 'node:test';
 import assert from 'node:assert/strict';
-import { Form4Parser } from '../src/form4_parser.ts';
-import { Form8KParser } from '../src/form8k_parser.ts';
-import { SignalEngine } from '../src/signal_engine.ts';
-import { verifyOfflineLicenseKey } from '../src/license_verifier.ts';
+import { Form4Parser, Form8KParser, SignalEngine, verifyOfflineLicenseKey } from '../dist/index.js';
 
 describe('EdgarPulse 8-K Standalone Clean-Sheet Venture Test Suite', () => {
 
