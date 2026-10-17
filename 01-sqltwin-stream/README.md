@@ -67,7 +67,7 @@ jobs:
 
 - **Community Tier**: Free for dumps up to **10,000 rows** per run.
 - **Pro & Enterprise Tier**: Unlimited rows, air-gapped commercial deployment, and custom format regex rules ($79 One-Time or $19/month).
-- Instant Ed25519 license keys are issued immediately via [Polar.sh Checkout](https://polar.sh/checkout?product_id=21450547-9e11-444d-a25f-d36fc6cbf06c).
+- Instant Ed25519 license keys are issued immediately via [Polar.sh Checkout](https://buy.polar.sh/polar_cl_U1yYwbQsxur0rbGxVx4GdtOMxlsaHJ15BUARn2cUkfR).
 
 ---
 

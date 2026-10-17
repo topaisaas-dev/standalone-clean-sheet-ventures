@@ -55,7 +55,7 @@ try {
     metricName: 'box specifications',
     currentValue: boxes.length,
     freeLimit: license.allowedBoxes,
-    checkoutUrl: 'https://polar.sh/checkout?product_id=2d54b17a-7735-4c3d-af31-0155301d1358&ref=cli_inflow',
+    checkoutUrl: 'https://buy.polar.sh/polar_cl_nQ28CN7gE175wwIji5fadiW2BjicQ4CyfJarn3tvVlk',
     priceText: '$19/mo (or $49/mo Plus)'
   }, license.valid, hasEmergencyGrace);
 

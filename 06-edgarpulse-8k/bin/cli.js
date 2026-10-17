@@ -126,7 +126,7 @@ if (command === 'parse-form4') {
     metricName: 'alpha signals',
     currentValue: allSignals.length,
     freeLimit: license.maxSignalsPerRun,
-    checkoutUrl: 'https://polar.sh/checkout?product_id=aafd4325-d55b-4087-9be2-c0be5fbc4144&ref=cli_inflow',
+    checkoutUrl: 'https://buy.polar.sh/polar_cl_6FsrpUqrkka6YEmbvDERxCuZ0jJxd3muVtvsB2wRGOR',
     priceText: '$49/month'
   }, license.valid, hasEmergencyGrace);
 

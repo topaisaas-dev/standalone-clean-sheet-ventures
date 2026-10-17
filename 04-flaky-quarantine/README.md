@@ -94,7 +94,7 @@ npx @topaisaas/flaky-quarantine analyze --reports run1.xml,run2.xml --output .fl
 ## 🔐 Zero-Server Offline Ed25519 Licensing
 
 - **Community Free Tier**: Up to 5 quarantined tests per repository forever.
-- **Team Pro / Enterprise Tier**: Unlimited quarantines, team slack notifications, automated Jira flakiness ticket sync ($29/mo via [Polar.sh Checkout](https://polar.sh/checkout?product_id=8d6ecbdc-7be3-41a0-a108-29865b8898e4) or GitHub Marketplace billing).
+- **Team Pro / Enterprise Tier**: Unlimited quarantines, team slack notifications, automated Jira flakiness ticket sync ($29/mo via [Polar.sh Checkout](https://buy.polar.sh/polar_cl_iel9yWlONZUVA92iPTUR0WgdhRoWjYWCDtypa47534c) or GitHub Marketplace billing).
 - **100% Offline Validation**: Ed25519 digital signature verified on the runner ($0.00 infrastructure cost, zero server dependencies).
 
 ```bash

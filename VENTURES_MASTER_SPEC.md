@@ -62,10 +62,11 @@
 
 | # | Project Name | Live Polar Product ID | Model & Pricing | Direct Polar Checkout Link |
 | :- | :--- | :--- | :--- | :--- |
-| **01** | **SQLTwin Stream** | `21450547-9e11-444d-a25f-d36fc6cbf06c` | $79 One-Time (or $19/mo) | [Checkout SQLTwin](https://polar.sh/checkout?product_id=21450547-9e11-444d-a25f-d36fc6cbf06c) |
-| **02** | **Pack3D Wasm** | `2d54b17a-7735-4c3d-af31-0155301d1358` | $19/mo (or $49/mo Plus) | [Checkout Pack3D](https://polar.sh/checkout?product_id=2d54b17a-7735-4c3d-af31-0155301d1358) |
-| **03** | **CIDR Shield MMDB** | `62b3c32e-fb65-47ec-b627-db99b51eda66` | 15 €/mo or 99 €/year | [Checkout CIDR Shield](https://polar.sh/checkout?product_id=62b3c32e-fb65-47ec-b627-db99b51eda66) |
-| **04** | **Flaky Quarantine** | `8d6ecbdc-7be3-41a0-a108-29865b8898e4` | $29/month | [Checkout Flaky Quarantine](https://polar.sh/checkout?product_id=8d6ecbdc-7be3-41a0-a108-29865b8898e4) |
-| **05** | **TerraCost Blast** | `3fb1980f-938c-453f-80b0-9235340dadcb` | $49/mo or $149 Lifetime | [Checkout TerraCost](https://polar.sh/checkout?product_id=3fb1980f-938c-453f-80b0-9235340dadcb) |
-| **06** | **EdgarPulse 8-K** | `aafd4325-d55b-4087-9be2-c0be5fbc4144` | $49/month | [Checkout EdgarPulse](https://polar.sh/checkout?product_id=aafd4325-d55b-4087-9be2-c0be5fbc4144) |
+| **01** | **SQLTwin Stream** | `21450547-9e11-444d-a25f-d36fc6cbf06c` | $79 One-Time (or $19/mo) | [Checkout SQLTwin](https://buy.polar.sh/polar_cl_U1yYwbQsxur0rbGxVx4GdtOMxlsaHJ15BUARn2cUkfR) |
+| **02** | **Pack3D Wasm** | `2d54b17a-7735-4c3d-af31-0155301d1358` | $19/mo (or $49/mo Plus) | [Checkout Pack3D](https://buy.polar.sh/polar_cl_nQ28CN7gE175wwIji5fadiW2BjicQ4CyfJarn3tvVlk) |
+| **03** | **CIDR Shield MMDB** | `62b3c32e-fb65-47ec-b627-db99b51eda66` | 15 €/mo or 99 €/year | [Checkout CIDR Shield](https://buy.polar.sh/polar_cl_uQsijc1bMk2dGe9FpGlOA7be6vT9F4p13j6f80dxd0p) |
+| **04** | **Flaky Quarantine** | `8d6ecbdc-7be3-41a0-a108-29865b8898e4` | $29/month | [Checkout Flaky Quarantine](https://buy.polar.sh/polar_cl_iel9yWlONZUVA92iPTUR0WgdhRoWjYWCDtypa47534c) |
+| **05** | **TerraCost Blast** | `3fb1980f-938c-453f-80b0-9235340dadcb` | $49/mo or $149 Lifetime | [Checkout TerraCost](https://buy.polar.sh/polar_cl_bHsPkpJfvHmG9STDpIdNGVMLpSwVG6wHoQPTz3Fa7TY) |
+| **06** | **EdgarPulse 8-K** | `aafd4325-d55b-4087-9be2-c0be5fbc4144` | $49/month | [Checkout EdgarPulse](https://buy.polar.sh/polar_cl_6FsrpUqrkka6YEmbvDERxCuZ0jJxd3muVtvsB2wRGOR) |
+
 

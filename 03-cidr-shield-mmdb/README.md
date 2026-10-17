@@ -87,7 +87,7 @@ export function securityMiddleware(req, res, next) {
 
 Daily updated database feeds and automated Cloudflare R2 sync tokens are unlocked via offline **Ed25519 digital signatures**:
 - **Community Static Tier**: Free forever with built-in core cloud and Tor feeds.
-- **Pro Tier (Daily R2 Update Stream)**: 15 €/mo or 99 €/year with automated daily cron feed synchronizer via [Polar.sh Checkout](https://polar.sh/checkout?product_id=62b3c32e-fb65-47ec-b627-db99b51eda66).
+- **Pro Tier (Daily R2 Update Stream)**: 15 €/mo or 99 €/year with automated daily cron feed synchronizer via [Polar.sh Checkout](https://buy.polar.sh/polar_cl_uQsijc1bMk2dGe9FpGlOA7be6vT9F4p13j6f80dxd0p).
 - Validated locally on your machine with zero licensing server dependencies.
 
 ```bash

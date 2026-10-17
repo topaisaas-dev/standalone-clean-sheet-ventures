@@ -70,7 +70,7 @@ console.log(`Volumetric Weight: ${plan.totalVolumetricWeight} kg`);
 
 Commercial licenses use **Ed25519 digital signatures** verified offline with zero HTTP network calls:
 - **Community Tier**: Free for stores with up to 3 box specifications.
-- **Shopify Growth / Plus Tier**: ($19 to $49/mo via Shopify App Store Billing API or direct [Polar.sh Checkout](https://polar.sh/checkout?product_id=2d54b17a-7735-4c3d-af31-0155301d1358)).
+- **Shopify Growth / Plus Tier**: ($19 to $49/mo via Shopify App Store Billing API or direct [Polar.sh Checkout](https://buy.polar.sh/polar_cl_nQ28CN7gE175wwIji5fadiW2BjicQ4CyfJarn3tvVlk)).
 - No external server dependencies, guaranteed 100% uptime.
 
 ```bash

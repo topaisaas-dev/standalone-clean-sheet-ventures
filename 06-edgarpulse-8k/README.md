@@ -83,7 +83,7 @@ if (signal && signal.convictionScore >= 80) {
 ## 🔐 Zero-Server Offline Ed25519 Licensing
 
 - **Community Free Tier**: Delayed signals, up to 5 alerts per run.
-- **Quant Fund Pro Tier**: Real-time websocket stream access, unlimited cluster signals, CSV streaming output ($49/mo via [Polar.sh Checkout](https://polar.sh/checkout?product_id=aafd4325-d55b-4087-9be2-c0be5fbc4144) or HTTP 402 micro-payments).
+- **Quant Fund Pro Tier**: Real-time websocket stream access, unlimited cluster signals, CSV streaming output ($49/mo via [Polar.sh Checkout](https://buy.polar.sh/polar_cl_6FsrpUqrkka6YEmbvDERxCuZ0jJxd3muVtvsB2wRGOR) or HTTP 402 micro-payments).
 - **100% Offline Cryptographic Verification**: Signed Ed25519 tokens verified locally ($0.00 server infrastructure overhead).
 
 ```bash

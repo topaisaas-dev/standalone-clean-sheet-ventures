@@ -111,7 +111,7 @@ if (command === 'scan') {
     metricName: 'quarantined flaky tests',
     currentValue: totalFlakyDetected,
     freeLimit: license.maxQuarantines,
-    checkoutUrl: 'https://polar.sh/checkout?product_id=8d6ecbdc-7be3-41a0-a108-29865b8898e4&ref=cli_inflow',
+    checkoutUrl: 'https://buy.polar.sh/polar_cl_iel9yWlONZUVA92iPTUR0WgdhRoWjYWCDtypa47534c',
     priceText: '$29/month'
   }, license.valid, hasEmergencyGrace);
 

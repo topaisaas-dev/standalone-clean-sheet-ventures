@@ -52,7 +52,7 @@ async function main() {
         metricName: 'rows',
         currentValue: rowNum,
         freeLimit: 10000,
-        checkoutUrl: 'https://polar.sh/checkout?product_id=21450547-9e11-444d-a25f-d36fc6cbf06c&ref=cli_inflow',
+        checkoutUrl: 'https://buy.polar.sh/polar_cl_U1yYwbQsxur0rbGxVx4GdtOMxlsaHJ15BUARn2cUkfR',
         priceText: '$79 one-time (or $19/mo)'
       }, false, options.emergencyGrace);
 

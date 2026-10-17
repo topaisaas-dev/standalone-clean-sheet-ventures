@@ -84,7 +84,7 @@ if (command === 'lookup') {
     metricName: 'daily sync requests',
     currentValue: 1,
     freeLimit: 0,
-    checkoutUrl: 'https://polar.sh/checkout?product_id=62b3c32e-fb65-47ec-b627-db99b51eda66&ref=cli_inflow',
+    checkoutUrl: 'https://buy.polar.sh/polar_cl_uQsijc1bMk2dGe9FpGlOA7be6vT9F4p13j6f80dxd0p',
     priceText: '15 €/mo or 99 €/year'
   }, license.dailyDownloadUrlAllowed, hasEmergencyGrace);
 
@@ -122,7 +122,7 @@ if (command === 'lookup') {
       metricName: 'custom CIDR prefixes',
       currentValue: raw.length,
       freeLimit: 500,
-      checkoutUrl: 'https://polar.sh/checkout?product_id=62b3c32e-fb65-47ec-b627-db99b51eda66&ref=cli_inflow',
+      checkoutUrl: 'https://buy.polar.sh/polar_cl_uQsijc1bMk2dGe9FpGlOA7be6vT9F4p13j6f80dxd0p',
       priceText: '15 €/mo or 99 €/year'
     }, license.valid, hasEmergencyGrace);
 
