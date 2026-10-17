@@ -1,6 +1,6 @@
 {
   "name": "@topaisaas/dockerlean-wasm",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Deterministic, air-gapped Dockerfile & OCI layer optimizer. Detects 12 bloat anti-patterns, cache invalidations, and security flaws in sub-50ms with zero Docker daemon dependency.",
   "type": "module",
   "main": "dist/index.js",

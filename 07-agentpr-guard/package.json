@@ -1,6 +1,6 @@
 {
   "name": "@topaisaas/agentpr-guard",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Deterministic Pull Request auditor for AI-generated code. Detects hallucinated npm/pypi dependencies, architectural boundary breaches, and excessive AI slop in CI/CD.",
   "type": "module",
   "main": "dist/index.js",
