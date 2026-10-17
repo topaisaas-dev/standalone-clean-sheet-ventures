@@ -1,0 +1,29 @@
+name: 'Pack3D Wasm 3D Packing Optimizer'
+description: 'High-Performance 3D Bin Packing & Volumetric Weight Optimizer for E-Commerce and Logistics.'
+author: 'TopAI Sovereign Studio'
+branding:
+  icon: 'package'
+  color: 'orange'
+
+inputs:
+  items_json:
+    description: 'JSON array of items to pack with dimensions [w, h, d, weight]'
+    required: true
+  boxes_json:
+    description: 'JSON array of available carton containers'
+    required: false
+    default: ''
+  license_key:
+    description: 'Offline Ed25519 commercial license key'
+    required: false
+    default: ''
+
+outputs:
+  boxes_required:
+    description: 'Minimum number of boxes required to pack all items'
+  total_volume_cm3:
+    description: 'Total volume occupied in cubic centimeters'
+
+runs:
+  using: 'node20'
+  main: 'dist/cli.js'

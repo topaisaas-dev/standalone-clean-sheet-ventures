@@ -1,0 +1,32 @@
+name: 'CIDR Shield Threat IP Auditor'
+description: 'Zero-Latency Offline Datacenter & Threat IP Detection and Allowlist Auditor for CI/CD Pipelines.'
+author: 'TopAI Sovereign Studio'
+branding:
+  icon: 'shield'
+  color: 'red'
+
+inputs:
+  ip_address:
+    description: 'IPv4 address to audit'
+    required: false
+    default: ''
+  db_path:
+    description: 'Path to custom .cidrdb database (defaults to embedded datacenter & threat feeds)'
+    required: false
+    default: ''
+  license_key:
+    description: 'Offline Ed25519 commercial license key'
+    required: false
+    default: ''
+
+outputs:
+  risk_score:
+    description: 'Risk score from 0 to 100'
+  category:
+    description: 'IP category (DATACENTER_CLOUD, BOT_PROXY, CLEAN_RESIDENTIAL, etc.)'
+  provider:
+    description: 'Provider name (AWS, GCP, Cloudflare, Tor, etc.)'
+
+runs:
+  using: 'node20'
+  main: 'dist/cli.js'

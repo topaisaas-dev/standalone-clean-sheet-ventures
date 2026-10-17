@@ -1,0 +1,25 @@
+name: 'EdgarPulse SEC 8-K & Insider Alpha Detector'
+description: 'Deterministic SEC Form 4 and 8-K Parser Isolating C-Suite Cluster Buying with Zero External Network Calls.'
+author: 'TopAI Sovereign Studio'
+branding:
+  icon: 'trending-up'
+  color: 'green'
+
+inputs:
+  filing_xml:
+    description: 'Path to SEC Form 4 or 8-K XML filing file'
+    required: true
+  license_key:
+    description: 'Offline Ed25519 commercial license key'
+    required: false
+    default: ''
+
+outputs:
+  conviction_score:
+    description: 'Quantitative conviction score (0 to 100)'
+  is_cluster_buy:
+    description: 'Whether multiple insiders bought shares in the same window'
+
+runs:
+  using: 'node20'
+  main: 'dist/cli.js'

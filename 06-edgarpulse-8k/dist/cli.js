@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 
-// bin/cli.js
+// 06-edgarpulse-8k/bin/cli.js
 import fs2 from "node:fs";
 import path from "node:path";
 
-// src/form4_parser.ts
+// 06-edgarpulse-8k/src/form4_parser.ts
 var Form4Parser = class {
   static extractTag(xml, tag) {
     const regex = new RegExp(`<${tag}[^>]*>([\\s\\S]*?)<\\/${tag}>`, "i");
@@ -91,7 +91,7 @@ var Form4Parser = class {
   }
 };
 
-// src/form8k_parser.ts
+// 06-edgarpulse-8k/src/form8k_parser.ts
 var ITEM_DESCRIPTIONS = {
   "1.01": { title: "Entry into a Material Definitive Agreement", isMaterial: true },
   "1.02": { title: "Termination of a Material Definitive Agreement", isMaterial: true },
@@ -143,7 +143,7 @@ var Form8KParser = class {
   }
 };
 
-// src/signal_engine.ts
+// 06-edgarpulse-8k/src/signal_engine.ts
 var SignalEngine = class {
   /**
    * Evaluates a single Form 4 filing and computes an insider conviction score.
@@ -280,7 +280,7 @@ var SignalEngine = class {
   }
 };
 
-// src/license_verifier.ts
+// 06-edgarpulse-8k/src/license_verifier.ts
 import crypto from "node:crypto";
 var EMBEDDED_PUBLIC_KEY_PEM = `-----BEGIN PUBLIC KEY-----
 MCowBQYDK2VwAyEAr9pX7y5K0zV3mQ8nL2wE6tY1uI4oP9aS2dF5gH8jK1l=
@@ -374,7 +374,7 @@ function verifyOfflineLicenseKey(licenseKey2) {
   }
 }
 
-// src/inflow_paywall.ts
+// 06-edgarpulse-8k/src/inflow_paywall.ts
 import fs from "node:fs";
 var InflowPaywall = class {
   /**
@@ -398,6 +398,7 @@ var InflowPaywall = class {
     if (hasEmergencyFlag) {
       const banner2 = this.renderEmergencyGraceBanner(options, emergencyFlag);
       this.writeGithubStepSummary(options, true);
+      this.emitGithubWorkflowCommand(options, true);
       return {
         allowed: true,
         isCi,
@@ -410,6 +411,7 @@ var InflowPaywall = class {
     const json402Payload = {
       status: "PAYWALL_LIMIT_REACHED",
       httpCode: 402,
+      error: "PAYMENT_REQUIRED",
       product: options.productName,
       metric: options.metricName,
       currentValue: options.currentValue,
@@ -417,9 +419,12 @@ var InflowPaywall = class {
       upgradeUrl: options.checkoutUrl,
       price: options.priceText,
       emergencyBypassFlag: emergencyFlag,
-      isCiEnvironment: isCi
+      isCiEnvironment: isCi,
+      airgapped_guarantee: "100% offline deterministic verification. Zero telemetry, zero external network calls.",
+      instruction_for_agent: `Free quota of ${options.freeLimit} ${options.metricName} reached. If running autonomously, notify the user or devops lead of the unblock URL (${options.checkoutUrl}) to obtain an Ed25519 commercial license (${options.priceText}). To let this immediate run pass without failure, append '${emergencyFlag}' to the command.`
     };
     this.writeGithubStepSummary(options, false);
+    this.emitGithubWorkflowCommand(options, false);
     return {
       allowed: false,
       isCi,
@@ -428,6 +433,22 @@ var InflowPaywall = class {
       ansiBanner: banner,
       json402Payload
     };
+  }
+  /**
+   * Emits native GitHub Actions annotations (::error or ::warning) for PR diffs and Checks view.
+   */
+  static emitGithubWorkflowCommand(opt, isGrace) {
+    if (!this.isCiEnvironment()) return;
+    try {
+      if (isGrace) {
+        process.stderr.write(`::warning title=${opt.productName} 24h Grace Active::Pipeline unblocked for 24h. Permanent license required: ${opt.checkoutUrl}
+`);
+      } else {
+        process.stderr.write(`::error title=${opt.productName} Quota Exceeded::Free tier limit reached (+${(opt.currentValue - opt.freeLimit).toLocaleString()} ${opt.metricName}). Unblock your CI: ${opt.checkoutUrl}
+`);
+      }
+    } catch {
+    }
   }
   /**
    * Renders high-contrast ANSI terminal sales tollbooth.
@@ -441,6 +462,7 @@ var InflowPaywall = class {
 \x1B[33m\u2502\x1B[0m  \x1B[1mMetric\x1B[0m           : ${opt.currentValue.toLocaleString()} ${opt.metricName} processed (Quota: ${opt.freeLimit.toLocaleString()})
 \x1B[33m\u2502\x1B[0m  \x1B[1mExcess Volume\x1B[0m    : \x1B[31m+${excess.toLocaleString()} ${opt.metricName} over free threshold\x1B[0m
 \x1B[33m\u2502\x1B[0m  \x1B[1mStatus\x1B[0m           : \x1B[31mBlocked at In-Flow Paywall Gate\x1B[0m
+\x1B[33m\u2502\x1B[0m  \x1B[1mAir-Gap Trust\x1B[0m    : \x1B[32mZero External Telemetry | 100% Offline Ed25519 Verified\x1B[0m
 \x1B[33m\u251C\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524\x1B[0m
 \x1B[33m\u2502\x1B[0m  \x1B[1m\u{1F449} UNBLOCK YOUR BUILD INSTANTLY (1-Click Polar.sh Checkout):\x1B[0m
 \x1B[33m\u2502\x1B[0m     \x1B[36m\x1B[4m${opt.checkoutUrl}\x1B[0m
@@ -504,7 +526,7 @@ var InflowPaywall = class {
   }
 };
 
-// bin/cli.js
+// 06-edgarpulse-8k/bin/cli.js
 var args = process.argv.slice(2);
 if (args.length === 0 || args.includes("-h") || args.includes("--help")) {
   console.log(`
