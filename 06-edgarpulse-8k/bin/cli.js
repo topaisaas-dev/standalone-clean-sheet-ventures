@@ -6,7 +6,7 @@ import { Form4Parser } from '../src/form4_parser.ts';
 import { Form8KParser } from '../src/form8k_parser.ts';
 import { SignalEngine } from '../src/signal_engine.ts';
 import { verifyOfflineLicenseKey } from '../src/license_verifier.ts';
-import { InflowPaywall } from '../../shared/inflow-paywall/src/inflow_paywall.ts';
+import { InflowPaywall } from '../src/inflow_paywall.ts';
 
 const args = process.argv.slice(2);
 
@@ -163,3 +163,4 @@ if (command === 'parse-form4') {
   console.error(`Unknown command: ${command}`);
   process.exit(1);
 }
+

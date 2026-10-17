@@ -6,7 +6,7 @@ import { JUnitParser } from '../src/junit_parser.ts';
 import { AntiPatternScanner } from '../src/anti_pattern_scanner.ts';
 import { QuarantineManager } from '../src/quarantine_manager.ts';
 import { verifyOfflineLicenseKey } from '../src/license_verifier.ts';
-import { InflowPaywall } from '../../shared/inflow-paywall/src/inflow_paywall.ts';
+import { InflowPaywall } from '../src/inflow_paywall.ts';
 
 const args = process.argv.slice(2);
 
@@ -159,3 +159,4 @@ if (command === 'scan') {
   console.error(`Unknown command: ${command}`);
   process.exit(1);
 }
+

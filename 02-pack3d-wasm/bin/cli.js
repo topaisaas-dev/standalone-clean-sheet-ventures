@@ -4,7 +4,7 @@ import fs from 'node:fs';
 import { Packer3D } from '../src/packer_3d.ts';
 import { verifyOfflineLicenseKey } from '../src/license_verifier.ts';
 import { DEFAULT_SHOPIFY_BOX_CATALOG } from '../src/shopify_function.ts';
-import { InflowPaywall } from '../../shared/inflow-paywall/src/inflow_paywall.ts';
+import { InflowPaywall } from '../src/inflow_paywall.ts';
 
 const args = process.argv.slice(2);
 
@@ -100,3 +100,4 @@ try {
   console.error('Execution error:', err.message);
   process.exit(1);
 }
+

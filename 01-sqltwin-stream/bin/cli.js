@@ -2,7 +2,7 @@
 import fs from 'node:fs';
 import readline from 'node:readline';
 import { SqlStreamParser } from '../src/sql_stream_parser.ts';
-import { InflowPaywall } from '../../shared/inflow-paywall/src/inflow_paywall.ts';
+import { InflowPaywall } from '../src/inflow_paywall.ts';
 
 function parseArgs() {
   const args = process.argv.slice(2);
@@ -91,3 +91,4 @@ main().catch(err => {
   console.error('[SQLTWIN FATAL]', err);
   process.exit(1);
 });
+
