@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json.schemastore.org/mcp.json",
+  "name": "topai-mcp-suite",
+  "version": "1.0.3",
+  "description": "Unified Model Context Protocol (MCP) server providing 9 deterministic developer micro-appliances for Claude Desktop, Cursor, and Windsurf.",
+  "homepage": "https://github.com/topaisaas-dev/mcp-suite",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/topaisaas-dev/mcp-suite.git"
+  },
+  "mcpServers": {
+    "topai-suite": {
+      "command": "npx",
+      "args": ["-y", "@topaisaas/mcp-suite"]
+    }
+  }
+}

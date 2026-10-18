@@ -1,6 +1,6 @@
 {
   "name": "@topaisaas/mcp-suite",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Unified Model Context Protocol (MCP) server exposing all 9 TopAI Sovereign developer appliances natively to Claude Desktop, Cursor, and Windsurf.",
   "type": "module",
   "main": "dist/index.js",
@@ -11,7 +11,10 @@
   "files": [
     "dist",
     "README.md",
-    "LICENSE"
+    "LICENSE",
+    "smithery.yaml",
+    "glama.json",
+    "mcp.json"
   ],
   "publishConfig": {
     "access": "public"
@@ -23,10 +26,14 @@
   },
   "keywords": [
     "mcp",
+    "mcp-server",
     "model-context-protocol",
     "claude-desktop",
     "cursor",
     "windsurf",
+    "smithery",
+    "glama",
+    "pulsemcp",
     "developer-tools",
     "ai-agent",
     "zero-dependency"

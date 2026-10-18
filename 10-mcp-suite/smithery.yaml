@@ -1,0 +1,19 @@
+name: "topai-mcp-suite"
+title: "TopAI Sovereign Developer Appliances Suite"
+description: >
+  Unified Model Context Protocol (MCP) server providing 9 air-gapped, deterministic micro-appliances directly to Claude Desktop, Cursor, and Windsurf:
+  Agent-PR Guard (Anti-Hallucination PR auditor), TokenPrune Wasm (-50% to -70% LLM prompt tokens), DockerLean Wasm (Static Dockerfile bloat auditor),
+  SQLTwin Stream (Foreign-key preserving database anonymizer), Flaky Quarantine (Markov chain flaky test quarantine),
+  TerraCost Blast (Air-gapped Terraform blast radius and FinOps cost delta), Pack3D Wasm (3D bin-packing optimizer),
+  CIDR Shield (Sub-microsecond datacenter/proxy IP detector), and EdgarPulse 8-K (SEC insider conviction alpha).
+homepage: "https://github.com/topaisaas-dev/mcp-suite"
+icon: "https://topaigateway.com/badge.svg"
+repository: "https://github.com/topaisaas-dev/mcp-suite"
+
+startCommand:
+  type: stdio
+  configSchema:
+    type: object
+    properties: {}
+  command: "npx"
+  args: ["-y", "@topaisaas/mcp-suite"]
