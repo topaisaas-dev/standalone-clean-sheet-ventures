@@ -14,7 +14,9 @@
     "LICENSE",
     "smithery.yaml",
     "glama.json",
-    "mcp.json"
+    "mcp.json",
+    "manifest.json",
+    "Dockerfile"
   ],
   "publishConfig": {
     "access": "public"
