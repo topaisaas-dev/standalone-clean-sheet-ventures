@@ -8,4 +8,4 @@ COPY glama.json mcp.json smithery.yaml manifest.json README.md LICENSE ./
 
 ENV NODE_ENV=production
 
-ENTRYPOINT ["node", "dist/cli.js"]
+CMD ["node", "dist/cli.js"]
