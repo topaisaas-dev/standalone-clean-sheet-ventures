@@ -461,7 +461,7 @@ var paywallStatus = InflowPaywall.evaluate({
   currentValue: 3,
   // triggers paywall on free tier (2) without key
   freeLimit: license.maxDockerfiles,
-  checkoutUrl: "https://buy.polar.sh/polar_cl_dockerlean_placeholder",
+  checkoutUrl: "https://buy.polar.sh/polar_cl_z8AW0MGKNFyHrDG4rHySEtviAxtxze5vnJLF64JjI6L",
   priceText: "$29 one-time lifetime"
 }, license.valid, hasEmergencyGrace);
 if (!paywallStatus.allowed) {

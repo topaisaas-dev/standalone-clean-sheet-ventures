@@ -90,9 +90,9 @@
 | **04** | **Flaky Quarantine** | `8d6ecbdc-7be3-41a0-a108-29865b8898e4` | $29/month | [Checkout Flaky Quarantine](https://buy.polar.sh/polar_cl_iel9yWlONZUVA92iPTUR0WgdhRoWjYWCDtypa47534c) |
 | **05** | **TerraCost Blast** | `3fb1980f-938c-453f-80b0-9235340dadcb` | $49/mo or $149 Lifetime | [Checkout TerraCost](https://buy.polar.sh/polar_cl_bHsPkpJfvHmG9STDpIdNGVMLpSwVG6wHoQPTz3Fa7TY) |
 | **06** | **EdgarPulse 8-K** | `aafd4325-d55b-4087-9be2-c0be5fbc4144` | $49/month | [Checkout EdgarPulse](https://buy.polar.sh/polar_cl_6FsrpUqrkka6YEmbvDERxCuZ0jJxd3muVtvsB2wRGOR) |
-| **07** | **Agent-PR Guard** | *(Polar Product Pending)* | $39/month | [Checkout Agent-PR](https://buy.polar.sh/polar_cl_agentpr_placeholder) |
-| **08** | **TokenPrune Wasm** | *(Polar Product Pending)* | $29 One-Time | [Checkout TokenPrune](https://buy.polar.sh/polar_cl_tokenprune_placeholder) |
-| **09** | **DockerLean Wasm** | *(Polar Product Pending)* | $29 One-Time | [Checkout DockerLean](https://buy.polar.sh/polar_cl_dockerlean_placeholder) |
+| **07** | **Agent-PR Guard** | `polar_cl_OUy6Q7GoY78aXhbdaFyoJ646wtXgD7mszAadt4FgJHz` | $39/month | [Checkout Agent-PR](https://buy.polar.sh/polar_cl_OUy6Q7GoY78aXhbdaFyoJ646wtXgD7mszAadt4FgJHz) |
+| **08** | **TokenPrune Wasm** | `polar_cl_BeGjZghhPIilCdSBQGhvIFd2o8MyhngRnpZ0F34etCB` | $29 One-Time | [Checkout TokenPrune](https://buy.polar.sh/polar_cl_BeGjZghhPIilCdSBQGhvIFd2o8MyhngRnpZ0F34etCB) |
+| **09** | **DockerLean Wasm** | `polar_cl_z8AW0MGKNFyHrDG4rHySEtviAxtxze5vnJLF64JjI6L` | $29 One-Time | [Checkout DockerLean](https://buy.polar.sh/polar_cl_z8AW0MGKNFyHrDG4rHySEtviAxtxze5vnJLF64JjI6L) |
 
 
 

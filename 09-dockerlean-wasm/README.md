@@ -43,7 +43,7 @@ npx -y @topaisaas/dockerlean-wasm Dockerfile --markdown
 
 - **Community Free Tier**: Up to 2 Dockerfiles audited.
 - **Pro Lifetime**: Unlimited Dockerfiles and CI pipelines.
-- **Instant 1-Click Unblock**: [Purchase License on Polar.sh](https://buy.polar.sh/polar_cl_dockerlean_placeholder) ($29 one-time lifetime).
+- **Instant 1-Click Unblock**: [Purchase License on Polar.sh](https://buy.polar.sh/polar_cl_z8AW0MGKNFyHrDG4rHySEtviAxtxze5vnJLF64JjI6L) ($29 one-time lifetime).
 - **Emergency Production Hotfix Bypass**: Append `--emergency-pass-24h` to bypass paywalls for 24 hours during critical hotfixes.
 
 ---

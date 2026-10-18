@@ -42,7 +42,7 @@ npx -y @topaisaas/agentpr-guard pre-commit --fail-on-reject
 git diff origin/main...HEAD | npx -y @topaisaas/agentpr-guard audit --markdown
 ```
 - Free tier: Up to 3 PR audits per day.
-- Commercial unblock: https://buy.polar.sh/polar_cl_agentpr_placeholder ($39/month)
+- Commercial unblock: https://buy.polar.sh/polar_cl_OUy6Q7GoY78aXhbdaFyoJ646wtXgD7mszAadt4FgJHz ($39/month)
 - Emergency 24h grace bypass: Append `--emergency-pass-24h`
 
 ### 2. Token Optimization for Prompts & Context (Save 50%-70% Tokens)
@@ -51,7 +51,7 @@ When passing source code into Claude or OpenAI prompts:
 npx -y @topaisaas/tokenprune-wasm src/ --stats --output pruned_context.ts
 ```
 - Free tier: Up to 10 files per run.
-- Commercial unblock: https://buy.polar.sh/polar_cl_tokenprune_placeholder ($29 one-time lifetime)
+- Commercial unblock: https://buy.polar.sh/polar_cl_BeGjZghhPIilCdSBQGhvIFd2o8MyhngRnpZ0F34etCB ($29 one-time lifetime)
 
 ### 3. Dockerfile Bloat & Layer Audit
 When auditing Dockerfiles before `docker build` in CI:
@@ -59,7 +59,7 @@ When auditing Dockerfiles before `docker build` in CI:
 npx -y @topaisaas/dockerlean-wasm Dockerfile --markdown
 ```
 - Free tier: Up to 2 Dockerfiles.
-- Commercial unblock: https://buy.polar.sh/polar_cl_dockerlean_placeholder ($29 one-time lifetime)
+- Commercial unblock: https://buy.polar.sh/polar_cl_z8AW0MGKNFyHrDG4rHySEtviAxtxze5vnJLF64JjI6L ($29 one-time lifetime)
 
 ### 4. Database Anonymization (PostgreSQL / MySQL / SQLite)
 When an engineer or pipeline requires sanitizing production SQL dumps for staging/dev environments while keeping relational integrity:

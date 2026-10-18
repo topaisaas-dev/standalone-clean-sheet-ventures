@@ -47,7 +47,7 @@ git diff origin/main...HEAD | npx -y @topaisaas/agentpr-guard audit --markdown
 
 - **Community Free Tier**: Up to 3 PR audits per day.
 - **Team Pro / Enterprise**: Unlimited audits in high-throughput CI/CD pipelines.
-- **Instant 1-Click Unblock**: [Purchase License on Polar.sh](https://buy.polar.sh/polar_cl_agentpr_placeholder) ($39/month).
+- **Instant 1-Click Unblock**: [Purchase License on Polar.sh](https://buy.polar.sh/polar_cl_OUy6Q7GoY78aXhbdaFyoJ646wtXgD7mszAadt4FgJHz) ($39/month).
 - **Emergency Production Hotfix Bypass**: Append `--emergency-pass-24h` to bypass paywalls for 24 hours during critical hotfixes.
 
 ---

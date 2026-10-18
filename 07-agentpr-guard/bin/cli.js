@@ -80,7 +80,7 @@ const paywallStatus = InflowPaywall.evaluate({
   metricName: 'audited PRs',
   currentValue: 4, // triggers paywall if on free limit (3) without commercial key
   freeLimit: license.maxPrsPerDay,
-  checkoutUrl: 'https://buy.polar.sh/polar_cl_agentpr_placeholder',
+  checkoutUrl: 'https://buy.polar.sh/polar_cl_OUy6Q7GoY78aXhbdaFyoJ646wtXgD7mszAadt4FgJHz',
   priceText: '$39/month or $99 Lifetime'
 }, license.valid, hasEmergencyGrace);
 
