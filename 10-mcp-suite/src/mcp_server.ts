@@ -10,6 +10,7 @@ import { Form4Parser } from '../../06-edgarpulse-8k/dist/index.js';
 import { AgentPrGuard } from '../../07-agentpr-guard/dist/index.js';
 import { AstPruner } from '../../08-tokenprune-wasm/dist/index.js';
 import { DockerfileLinter } from '../../09-dockerlean-wasm/dist/index.js';
+import { QuotaManager } from './quota_manager.js';
 
 export const SERVER_INSTRUCTIONS =
   "TopAI Sovereign MCP Suite provides 9 deterministic, air-gapped developer appliances natively to AI agents (Claude Desktop, Cursor, Windsurf): " +
@@ -45,6 +46,10 @@ export const MCP_TOOLS = [
         diff: {
           type: 'string',
           description: "Unified git diff or PR patch text to audit. Must include hunk headers (e.g., 'diff --git a/... b/...')."
+        },
+        licenseKey: {
+          type: 'string',
+          description: "Optional TopAI Sovereign Pro offline license key (or set TOPAI_LICENSE_KEY env variable)."
         }
       },
       required: ['diff'],
@@ -76,6 +81,10 @@ export const MCP_TOOLS = [
         filename: {
           type: 'string',
           description: "Source filename with extension for AST dialect resolution (e.g., 'service.ts', 'component.tsx'). Defaults to 'source.ts'."
+        },
+        licenseKey: {
+          type: 'string',
+          description: "Optional TopAI Sovereign Pro offline license key (or set TOPAI_LICENSE_KEY env variable)."
         }
       },
       required: ['sourceCode'],
@@ -102,6 +111,10 @@ export const MCP_TOOLS = [
         dockerfileContent: {
           type: 'string',
           description: "Full UTF-8 content of the Dockerfile to audit for layer efficiency and security."
+        },
+        licenseKey: {
+          type: 'string',
+          description: "Optional TopAI Sovereign Pro offline license key (or set TOPAI_LICENSE_KEY env variable)."
         }
       },
       required: ['dockerfileContent'],
@@ -128,6 +141,10 @@ export const MCP_TOOLS = [
         ip: {
           type: 'string',
           description: "Standard dotted-decimal IPv4 address to classify (e.g., '3.5.10.1', '185.220.101.5')."
+        },
+        licenseKey: {
+          type: 'string',
+          description: "Optional TopAI Sovereign Pro offline license key (or set TOPAI_LICENSE_KEY env variable)."
         }
       },
       required: ['ip'],
@@ -154,6 +171,10 @@ export const MCP_TOOLS = [
         planJson: {
           type: 'string',
           description: "Valid JSON output generated from 'terraform show -json <planfile>'."
+        },
+        licenseKey: {
+          type: 'string',
+          description: "Optional TopAI Sovereign Pro offline license key (or set TOPAI_LICENSE_KEY env variable)."
         }
       },
       required: ['planJson'],
@@ -193,6 +214,10 @@ export const MCP_TOOLS = [
             required: ['id', 'w', 'h', 'd'],
             additionalProperties: false
           }
+        },
+        licenseKey: {
+          type: 'string',
+          description: "Optional TopAI Sovereign Pro offline license key (or set TOPAI_LICENSE_KEY env variable)."
         }
       },
       required: ['items'],
@@ -221,6 +246,10 @@ export const MCP_TOOLS = [
           type: 'array',
           items: { type: 'string' },
           description: "Array of JUnit XML report strings representing chronological CI test runs."
+        },
+        licenseKey: {
+          type: 'string',
+          description: "Optional TopAI Sovereign Pro offline license key (or set TOPAI_LICENSE_KEY env variable)."
         }
       },
       required: ['junitXmlReports'],
@@ -251,6 +280,10 @@ export const MCP_TOOLS = [
         secretSalt: {
           type: 'string',
           description: "Optional cryptographic HMAC salt for deterministic pseudonymization (default: 'mcp-salt')."
+        },
+        licenseKey: {
+          type: 'string',
+          description: "Optional TopAI Sovereign Pro offline license key (or set TOPAI_LICENSE_KEY env variable)."
         }
       },
       required: ['sqlContent'],
@@ -277,6 +310,10 @@ export const MCP_TOOLS = [
         filingXml: {
           type: 'string',
           description: "Raw XML content of SEC EDGAR Form 4 or Form 8-K filing."
+        },
+        licenseKey: {
+          type: 'string',
+          description: "Optional TopAI Sovereign Pro offline license key (or set TOPAI_LICENSE_KEY env variable)."
         }
       },
       required: ['filingXml'],
@@ -305,22 +342,38 @@ export class McpServer {
       case 'agentpr_guard_audit': {
         const report = AgentPrGuard.auditDiff(args.diff || '');
         const md = AgentPrGuard.generateMarkdownReport(report);
-        return { report, markdown: md };
+        const hasVulnerability = !report.isApproved;
+        return {
+          report,
+          markdown: md,
+          hasVulnerability,
+          securityNotice: report.isApproved
+            ? "✅ PR Integrity Verified: No AI package hallucinations or credential leaks detected."
+            : "🛑 AI Supply-Chain Risk Intercepted: Hallucinated dependencies or boundary leaks caught."
+        };
       }
 
       case 'tokenprune_wasm_trim': {
         const result = AstPruner.pruneTypeScript(args.sourceCode || '', args.filename || 'source.ts');
+        const tokensSaved = result.tokensSaved || 0;
+        const dollarsSaved = Math.round((tokensSaved / 1_000_000) * 3.0 * 1000) / 1000;
         return {
           tokensSaved: result.tokensSaved,
           savingsRatioPercent: result.savingsRatioPercent,
-          prunedContent: result.prunedContent
+          prunedContent: result.prunedContent,
+          estimatedCostSavingsUsd: `$${dollarsSaved.toFixed(3)}`,
+          roiNotice: `Saved ${tokensSaved.toLocaleString()} prompt tokens on this run (~$${dollarsSaved.toFixed(3)} saved on Claude 3.5 Sonnet).`
         };
       }
 
       case 'dockerlean_wasm_audit': {
         const report = DockerfileLinter.audit(args.dockerfileContent || '');
         const md = DockerfileLinter.generateMarkdownReport(report);
-        return { report, markdown: md };
+        return {
+          report,
+          markdown: md,
+          efficiencyNotice: `DockerLean evaluated container layers. Optimization delta: ${report.leanScore}/100.`
+        };
       }
 
       case 'cidr_shield_lookup': {
@@ -413,7 +466,7 @@ export class McpServer {
               },
               serverInfo: {
                 name: 'topai-mcp-suite',
-                version: '1.0.4'
+                version: '1.0.5'
               },
               instructions: SERVER_INSTRUCTIONS
             }
@@ -438,20 +491,69 @@ export class McpServer {
           process.stdout.write(JSON.stringify({ jsonrpc: '2.0', id, result: { prompts: [] } }) + '\n');
         } else if (method === 'tools/call') {
           try {
-            const toolResult = await this.executeTool(params.name, params.arguments || {});
-            const response = {
-              jsonrpc: '2.0',
-              id,
-              result: {
-                content: [
-                  {
-                    type: 'text',
-                    text: JSON.stringify(toolResult, null, 2)
+            const toolName = params.name;
+            const args = params.arguments || {};
+            const licenseKey = args.licenseKey;
+
+            const quotaManager = QuotaManager.getInstance();
+            const evaluation = quotaManager.recordAndEvaluate({
+              toolName,
+              licenseKey
+            });
+
+            if (!evaluation.allowed) {
+              const paywallResponse = {
+                jsonrpc: '2.0',
+                id,
+                result: {
+                  isError: true,
+                  content: [
+                    {
+                      type: 'text',
+                      text: evaluation.paywallMessage || 'Quota exceeded. Upgrade to continue.'
+                    }
+                  ],
+                  _meta: {
+                    httpStatus: 402,
+                    paywall: {
+                      error: 'QUOTA_EXCEEDED',
+                      freeLimit: evaluation.freeLimit,
+                      callCount: evaluation.callCount,
+                      checkoutUrl: 'https://buy.polar.sh/polar_cl_OUy6Q7GoY78aXhbdaFyoJ646wtXgD7mszAadt4FgJHz'
+                    }
                   }
-                ]
-              }
-            };
-            process.stdout.write(JSON.stringify(response) + '\n');
+                }
+              };
+              process.stdout.write(JSON.stringify(paywallResponse) + '\n');
+            } else {
+              const toolResult = await this.executeTool(toolName, args);
+
+              // Update metrics if tool emitted savings or security hazards
+              quotaManager.recordCallMetrics(toolResult?.tokensSaved, toolResult?.hasVulnerability);
+
+              const response = {
+                jsonrpc: '2.0',
+                id,
+                result: {
+                  content: [
+                    {
+                      type: 'text',
+                      text: JSON.stringify(toolResult, null, 2) + '\n' + evaluation.roiFooter
+                    }
+                  ],
+                  _meta: {
+                    quota: {
+                      allowed: true,
+                      callCount: evaluation.callCount,
+                      remainingCalls: evaluation.remainingCalls,
+                      isLicensed: evaluation.isLicensed,
+                      cumulativeDollarsSaved: evaluation.dollarsSavedTotal
+                    }
+                  }
+                }
+              };
+              process.stdout.write(JSON.stringify(response) + '\n');
+            }
           } catch (toolErr: any) {
             const errorResponse = {
               jsonrpc: '2.0',

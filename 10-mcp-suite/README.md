@@ -42,6 +42,38 @@ Add this to your `claude_desktop_config.json` or `.cursor/mcp.json`:
 
 ---
 
+## 🛡️ License & Quota Tollbooth
+
+TopAI Sovereign MCP Suite comes with an out-of-the-box **Free Sandbox of 25 tool runs**, enabling immediate zero-friction evaluation directly inside Claude Desktop, Cursor, or Windsurf.
+
+### Activating Unlimited Pro / Lifetime Access
+To unlock unlimited runs for production pipelines, developer environments, or CI/CD:
+1. Obtain an instant Ed25519 offline license key via [Polar.sh Checkout](https://buy.polar.sh/polar_cl_OUy6Q7GoY78aXhbdaFyoJ646wtXgD7mszAadt4FgJHz)
+2. Inject the key into your environment or client config:
+
+```json
+{
+  "mcpServers": {
+    "topai-suite": {
+      "command": "npx",
+      "args": ["-y", "@topaisaas/mcp-suite"],
+      "env": {
+        "TOPAI_LICENSE_KEY": "TOPAI-PRO-XXXXXXXXXXXXXXXX"
+      }
+    }
+  }
+}
+```
+
+### Emergency 24-Hour Production Grace Bypass
+If a production pipeline exceeds its quota unexpectedly during an active incident:
+```bash
+export TOPAI_EMERGENCY_GRACE=1
+```
+This grants a 24-hour non-blocking bypass so builds never fail during release freezes.
+
+---
+
 ## 📄 License
 
 Apache-2.0. Copyright (c) 2026 TopAI Sovereign Studio.

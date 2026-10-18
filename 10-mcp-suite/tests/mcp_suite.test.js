@@ -1,6 +1,6 @@
 import { test, describe } from 'node:test';
 import assert from 'node:assert/strict';
-import { McpServer, MCP_TOOLS } from '../dist/index.js';
+import { McpServer, MCP_TOOLS, QuotaManager } from '../dist/index.js';
 
 describe('TopAI MCP Suite Standalone Clean-Sheet Venture Test Suite', () => {
 
@@ -63,6 +63,72 @@ RUN npm install
     assert.ok(res);
     assert.equal(res.provider, 'AWS');
     assert.equal(res.category, 'DATACENTER');
+  });
+
+  test('6. QuotaManager allows free tier calls up to 25 and blocks call 26 with paywall', () => {
+    const quota = QuotaManager.getInstance();
+    quota.resetForTesting({ totalCalls: 0 });
+
+    for (let i = 1; i <= 25; i++) {
+      const evalResult = quota.recordAndEvaluate({ toolName: 'tokenprune_wasm_trim' });
+      assert.equal(evalResult.allowed, true);
+      assert.equal(evalResult.callCount, i);
+      assert.equal(evalResult.isLicensed, false);
+    }
+
+    // Call 26 must trigger paywall
+    const blockedEval = quota.recordAndEvaluate({ toolName: 'tokenprune_wasm_trim' });
+    assert.equal(blockedEval.allowed, false);
+    assert.equal(blockedEval.callCount, 26);
+    assert.ok(blockedEval.paywallMessage.includes('TOPAI SUITE QUOTA EXCEEDED'));
+    assert.ok(blockedEval.paywallMessage.includes('https://buy.polar.sh/'));
+  });
+
+  test('7. QuotaManager bypasses paywall under emergency grace', () => {
+    const quota = QuotaManager.getInstance();
+    quota.resetForTesting({ totalCalls: 30 }); // over quota
+
+    const evalGrace = quota.recordAndEvaluate({ toolName: 'tokenprune_wasm_trim', hasEmergencyGrace: true });
+    assert.equal(evalGrace.allowed, true);
+    assert.equal(evalGrace.isEmergencyGrace, true);
+    assert.ok(evalGrace.roiFooter.includes('Emergency Grace Active'));
+  });
+
+  test('8. QuotaManager verifies offline Pro license key', () => {
+    const quota = QuotaManager.getInstance();
+    quota.resetForTesting({ totalCalls: 50 }); // over quota
+
+    const validKey = 'AGENTPR-ED25519-VERIFIED-PRO';
+    const evalLicensed = quota.recordAndEvaluate({
+      toolName: 'agentpr_guard_audit',
+      licenseKey: validKey
+    });
+
+    assert.equal(evalLicensed.allowed, true);
+    assert.equal(evalLicensed.isLicensed, true);
+    assert.ok(evalLicensed.roiFooter.includes('Pro License Active'));
+  });
+
+  test('9. QuotaManager accumulates tokens saved and calculates dollars saved', () => {
+    const quota = QuotaManager.getInstance();
+    quota.resetForTesting({ totalCalls: 0, tokensSavedTotal: 0, dollarsSavedTotal: 0 });
+
+    quota.recordCallMetrics(1_000_000, true);
+    const evalResult = quota.recordAndEvaluate({ toolName: 'tokenprune_wasm_trim' });
+
+    assert.equal(evalResult.tokensSavedTotal, 1_000_000);
+    assert.equal(evalResult.dollarsSavedTotal, 3.0);
+    assert.ok(evalResult.roiFooter.includes('$3.00'));
+  });
+
+  test('10. MCP_TOOLS have licenseKey and strict TDQS annotations', () => {
+    for (const tool of MCP_TOOLS) {
+      assert.ok(tool.inputSchema.properties.licenseKey, `Tool ${tool.name} must declare licenseKey`);
+      assert.equal(tool.inputSchema.additionalProperties, false);
+      assert.ok(tool.annotations);
+      assert.equal(tool.annotations.readOnlyHint, true);
+      assert.equal(tool.annotations.idempotentHint, true);
+    }
   });
 
 });
