@@ -1,0 +1,21 @@
+{
+  "manifest_version": "0.2",
+  "name": "@topaisaas/mcp-suite",
+  "version": "1.0.3",
+  "description": "Unified Model Context Protocol (MCP) server exposing all 9 TopAI Sovereign developer appliances natively to Claude Desktop, Cursor, and Windsurf.",
+  "author": {
+    "name": "TopAI Sovereign Studio"
+  },
+  "server": {
+    "type": "node",
+    "entry_point": "dist/index.js",
+    "mcp_config": {
+      "command": "node",
+      "args": [
+        "${__dirname}/dist/index.js"
+      ],
+      "env": {}
+    }
+  },
+  "license": "Apache-2.0"
+}
