@@ -11,123 +11,276 @@ import { AgentPrGuard } from '../../07-agentpr-guard/dist/index.js';
 import { AstPruner } from '../../08-tokenprune-wasm/dist/index.js';
 import { DockerfileLinter } from '../../09-dockerlean-wasm/dist/index.js';
 
+export const SERVER_INSTRUCTIONS =
+  "TopAI Sovereign MCP Suite provides 9 deterministic, air-gapped developer appliances natively to AI agents (Claude Desktop, Cursor, Windsurf): " +
+  "(1) PR Anti-Hallucination Guard (`agentpr_guard_audit`), " +
+  "(2) AST-Aware Token Pruning (`tokenprune_wasm_trim`), " +
+  "(3) Dockerfile Bloat Linter (`dockerlean_wasm_audit`), " +
+  "(4) Sub-millisecond CIDR Classifier (`cidr_shield_lookup`), " +
+  "(5) Terraform Blast Radius Evaluator (`terracost_blast_evaluate`), " +
+  "(6) 3D Bin Packing Optimizer (`pack3d_wasm_pack`), " +
+  "(7) Markov Flaky Test Quarantine (`flaky_quarantine_analyze`), " +
+  "(8) Format-Preserving SQL Anonymizer (`sqltwin_stream_anonymize`), and " +
+  "(9) SEC EDGAR Form 4/8-K Filing Parser (`edgarpulse_parse_filing`). " +
+  "All appliances execute locally in-memory with zero network telemetry.";
+
 export const MCP_TOOLS = [
   {
     name: 'agentpr_guard_audit',
-    description: 'Audit a git diff or Pull Request for AI-hallucinated packages, typosquatting, and architecture boundary breaches.',
+    description:
+      "Audits unified git diffs or Pull Requests for AI-hallucinated NPM/PyPI packages, typosquatting attacks, unauthorized boundary imports, and leaked secrets. " +
+      "Use when verifying code changes from AI coding agents (Cursor, Claude Code, Copilot) before merging into production repositories. " +
+      "Do not use for general AST syntax minification (use `tokenprune_wasm_trim` instead) or container configuration analysis (use `dockerlean_wasm_audit` instead). " +
+      "Stateless, read-only, idempotent execution in <5ms.",
+    annotations: {
+      title: "Pull Request Anti-Hallucination & Security Auditor",
+      readOnlyHint: true,
+      idempotentHint: true,
+      destructiveHint: false,
+      openWorldHint: false
+    },
     inputSchema: {
       type: 'object',
       properties: {
-        diff: { type: 'string', description: 'Unified git diff string to audit' }
+        diff: {
+          type: 'string',
+          description: "Unified git diff or PR patch text to audit. Must include hunk headers (e.g., 'diff --git a/... b/...')."
+        }
       },
-      required: ['diff']
+      required: ['diff'],
+      additionalProperties: false
     }
   },
   {
     name: 'tokenprune_wasm_trim',
-    description: 'Prune TypeScript/JavaScript source code to reduce LLM context token usage by 50%-70% by collapsing method bodies.',
+    description:
+      "Prunes TypeScript and JavaScript source code using AST parsing to extract public interfaces, type signatures, and exports while collapsing method implementations into concise summaries. " +
+      "Saves 50%-70% of LLM context window tokens without losing structural semantic information. " +
+      "Use when feeding large codebase files into LLM prompts for high-level reasoning or architecture planning. " +
+      "Do not use for PR security auditing (use `agentpr_guard_audit` instead). " +
+      "Stateless, read-only, idempotent execution in <10ms.",
+    annotations: {
+      title: "AST-Aware Token Pruning & Signature Extractor",
+      readOnlyHint: true,
+      idempotentHint: true,
+      destructiveHint: false,
+      openWorldHint: false
+    },
     inputSchema: {
       type: 'object',
       properties: {
-        sourceCode: { type: 'string', description: 'Source code content to prune' },
-        filename: { type: 'string', description: 'Filename for context (e.g. service.ts)' }
+        sourceCode: {
+          type: 'string',
+          description: "Raw TypeScript or JavaScript file content to prune and condense."
+        },
+        filename: {
+          type: 'string',
+          description: "Source filename with extension for AST dialect resolution (e.g., 'service.ts', 'component.tsx'). Defaults to 'source.ts'."
+        }
       },
-      required: ['sourceCode']
+      required: ['sourceCode'],
+      additionalProperties: false
     }
   },
   {
     name: 'dockerlean_wasm_audit',
-    description: 'Audit a Dockerfile statically for layer bloat, cache invalidation, root user, and missing multi-stage build.',
+    description:
+      "Statically lints and audits Dockerfiles for layer bloat, cache-busting RUN ordering, root user vulnerabilities, missing multi-stage build patterns, and excessive image footprint. " +
+      "Use when reviewing container configurations, CI/CD pipeline Dockerfiles, or developer images to ensure lean, secure containerization. " +
+      "Do not use for runtime container debugging or security auditing of git commits (use `agentpr_guard_audit` instead). " +
+      "Stateless, read-only, idempotent execution in <5ms.",
+    annotations: {
+      title: "Dockerfile Optimization & Bloat Linter",
+      readOnlyHint: true,
+      idempotentHint: true,
+      destructiveHint: false,
+      openWorldHint: false
+    },
     inputSchema: {
       type: 'object',
       properties: {
-        dockerfileContent: { type: 'string', description: 'Content of the Dockerfile' }
+        dockerfileContent: {
+          type: 'string',
+          description: "Full UTF-8 content of the Dockerfile to audit for layer efficiency and security."
+        }
       },
-      required: ['dockerfileContent']
+      required: ['dockerfileContent'],
+      additionalProperties: false
     }
   },
   {
     name: 'cidr_shield_lookup',
-    description: 'Query an IPv4 address with 0ms latency to detect Datacenter/Cloud servers, VPNs, Tor, and bot proxies.',
+    description:
+      "Performs sub-millisecond offline Radix Trie Longest Prefix Match (LPM) on any IPv4 address to classify traffic as Datacenter/Cloud (AWS, GCP, Azure, Hetzner), VPN, Tor Exit Node, Public Proxy, or Clean Residential. " +
+      "Use when authenticating incoming requests, preventing bot abuse, or assessing IP risk in auth flows without third-party network API calls. " +
+      "Do not use for domain DNS resolution or WHOIS lookups. " +
+      "Stateless, read-only, idempotent lookup in <0.01ms.",
+    annotations: {
+      title: "Zero-Latency IP Classifier & Cloud/Proxy Shield",
+      readOnlyHint: true,
+      idempotentHint: true,
+      destructiveHint: false,
+      openWorldHint: false
+    },
     inputSchema: {
       type: 'object',
       properties: {
-        ip: { type: 'string', description: 'IPv4 address (e.g. 3.5.10.1)' }
+        ip: {
+          type: 'string',
+          description: "Standard dotted-decimal IPv4 address to classify (e.g., '3.5.10.1', '185.220.101.5')."
+        }
       },
-      required: ['ip']
+      required: ['ip'],
+      additionalProperties: false
     }
   },
   {
     name: 'terracost_blast_evaluate',
-    description: 'Evaluate a Terraform JSON plan for blast radius, stateful resource destruction, and monthly FinOps cost delta.',
+    description:
+      "Evaluates Terraform plan JSON output to calculate infrastructure blast radius, identify high-risk stateful resource destructions (databases, storage buckets), and compute monthly FinOps cost delta estimations. " +
+      "Use in CI/CD pipelines or pre-apply infrastructure reviews to prevent accidental downtime and cloud budget overruns. " +
+      "Do not use for linting Docker containers (use `dockerlean_wasm_audit` instead). " +
+      "Stateless, read-only, idempotent analysis in <10ms.",
+    annotations: {
+      title: "Terraform Blast Radius & FinOps Cost Evaluator",
+      readOnlyHint: true,
+      idempotentHint: true,
+      destructiveHint: false,
+      openWorldHint: false
+    },
     inputSchema: {
       type: 'object',
       properties: {
-        planJson: { type: 'string', description: 'Terraform plan JSON content' }
+        planJson: {
+          type: 'string',
+          description: "Valid JSON output generated from 'terraform show -json <planfile>'."
+        }
       },
-      required: ['planJson']
+      required: ['planJson'],
+      additionalProperties: false
     }
   },
   {
     name: 'pack3d_wasm_pack',
-    description: '3D bin packing optimizer. Packs multiple 3D items into available cartons with 6-axis orthogonal rotation.',
+    description:
+      "Calculates optimal 3D carton packing arrangements for physical items using First-Fit Decreasing (FFD) and Extreme Point heuristics with full 6-axis orthogonal rotations. " +
+      "Computes container utilization percentage, volumetric freight weight, and unplaced items. " +
+      "Use for logistics optimization, e-commerce order fulfillment, and shipping carton selection. " +
+      "Do not use for 2D sheet nesting. " +
+      "Stateless, read-only, idempotent calculation in <15ms.",
+    annotations: {
+      title: "3D Extreme Point Bin Packing Optimizer",
+      readOnlyHint: true,
+      idempotentHint: true,
+      destructiveHint: false,
+      openWorldHint: false
+    },
     inputSchema: {
       type: 'object',
       properties: {
         items: {
           type: 'array',
+          description: "List of 3D items with dimensions (width, height, depth) and weights to pack into cartons.",
           items: {
             type: 'object',
             properties: {
-              id: { type: 'string' },
-              w: { type: 'number' },
-              h: { type: 'number' },
-              d: { type: 'number' },
-              weightKg: { type: 'number' }
+              id: { type: 'string', description: "Unique item identifier" },
+              w: { type: 'number', description: "Width in cm" },
+              h: { type: 'number', description: "Height in cm" },
+              d: { type: 'number', description: "Depth in cm" },
+              weightKg: { type: 'number', description: "Weight in kilograms (optional, default: 0.5)" }
             },
-            required: ['id', 'w', 'h', 'd']
+            required: ['id', 'w', 'h', 'd'],
+            additionalProperties: false
           }
         }
       },
-      required: ['items']
+      required: ['items'],
+      additionalProperties: false
     }
   },
   {
     name: 'flaky_quarantine_analyze',
-    description: 'Analyze test stability from multiple JUnit XML runs using Markov chain transition matrices.',
+    description:
+      "Analyzes multiple historical JUnit XML test run reports using two-state Markov chain transition matrices to statistically separate genuinely broken tests from nondeterministic flaky tests. " +
+      "Generates quarantine recommendations and test stability manifests. " +
+      "Use in CI/CD failure triage to automatically quarantine intermittent test suites. " +
+      "Do not use for git diff auditing (use `agentpr_guard_audit` instead). " +
+      "Stateless, read-only, idempotent analysis in <10ms.",
+    annotations: {
+      title: "Markov-Chain Test Flakiness & Quarantine Manager",
+      readOnlyHint: true,
+      idempotentHint: true,
+      destructiveHint: false,
+      openWorldHint: false
+    },
     inputSchema: {
       type: 'object',
       properties: {
         junitXmlReports: {
           type: 'array',
           items: { type: 'string' },
-          description: 'Array of JUnit XML report strings'
+          description: "Array of JUnit XML report strings representing chronological CI test runs."
         }
       },
-      required: ['junitXmlReports']
+      required: ['junitXmlReports'],
+      additionalProperties: false
     }
   },
   {
     name: 'sqltwin_stream_anonymize',
-    description: 'Anonymize raw SQL dump content preserving 100% of foreign key joins and unique constraints.',
+    description:
+      "Streams and anonymizes PostgreSQL/MySQL database dumps replacing PII (emails, phone numbers, names, IBANs) with synthetic values using HMAC format-preserving encryption while preserving 100% of foreign key joins, relational referential integrity, and unique constraints. " +
+      "Use when preparing production database snapshots for staging environments or local developer machines. " +
+      "Do not use for SEC filing extraction (use `edgarpulse_parse_filing` instead). " +
+      "Stateless, deterministic, offline execution in <10ms.",
+    annotations: {
+      title: "Deterministic Format-Preserving SQL Anonymizer",
+      readOnlyHint: true,
+      idempotentHint: true,
+      destructiveHint: false,
+      openWorldHint: false
+    },
     inputSchema: {
       type: 'object',
       properties: {
-        sqlContent: { type: 'string', description: 'Raw SQL dump content' },
-        secretSalt: { type: 'string', description: 'HMAC salt for deterministic pseudonymization' }
+        sqlContent: {
+          type: 'string',
+          description: "Raw SQL dump content containing CREATE TABLE, COPY, or INSERT statements."
+        },
+        secretSalt: {
+          type: 'string',
+          description: "Optional cryptographic HMAC salt for deterministic pseudonymization (default: 'mcp-salt')."
+        }
       },
-      required: ['sqlContent']
+      required: ['sqlContent'],
+      additionalProperties: false
     }
   },
   {
     name: 'edgarpulse_parse_filing',
-    description: 'Parse SEC Form 4 or 8-K XML filing to detect C-suite open market cluster purchases with quantitative conviction score.',
+    description:
+      "Parses raw SEC Form 4 and Form 8-K XML filings to extract C-suite insider transactions, open-market cluster purchases, vesting events, and calculate quantitative managerial conviction scores. " +
+      "Use when tracking institutional ownership changes or corporate governance signals in financial analysis workflows. " +
+      "Do not use for SQL dump anonymization (use `sqltwin_stream_anonymize` instead). " +
+      "Stateless, read-only, idempotent extraction in <5ms.",
+    annotations: {
+      title: "SEC Form 4 & 8-K Insider Sentiment Analyzer",
+      readOnlyHint: true,
+      idempotentHint: true,
+      destructiveHint: false,
+      openWorldHint: false
+    },
     inputSchema: {
       type: 'object',
       properties: {
-        filingXml: { type: 'string', description: 'Raw SEC XML filing content' }
+        filingXml: {
+          type: 'string',
+          description: "Raw XML content of SEC EDGAR Form 4 or Form 8-K filing."
+        }
       },
-      required: ['filingXml']
+      required: ['filingXml'],
+      additionalProperties: false
     }
   }
 ];
@@ -253,16 +406,23 @@ export class McpServer {
             id,
             result: {
               protocolVersion: '2024-11-05',
-              capabilities: { tools: {} },
+              capabilities: {
+                tools: { listChanged: false },
+                resources: { subscribe: false, listChanged: false },
+                prompts: { listChanged: false }
+              },
               serverInfo: {
-                name: 'topai-sovereign-suite',
-                version: '1.0.0'
-              }
+                name: 'topai-mcp-suite',
+                version: '1.0.4'
+              },
+              instructions: SERVER_INSTRUCTIONS
             }
           };
           process.stdout.write(JSON.stringify(response) + '\n');
         } else if (method === 'notifications/initialized') {
-          // No-op
+          // No-op lifecycle event
+        } else if (method === 'ping') {
+          process.stdout.write(JSON.stringify({ jsonrpc: '2.0', id, result: {} }) + '\n');
         } else if (method === 'tools/list') {
           const response = {
             jsonrpc: '2.0',
@@ -272,6 +432,10 @@ export class McpServer {
             }
           };
           process.stdout.write(JSON.stringify(response) + '\n');
+        } else if (method === 'resources/list') {
+          process.stdout.write(JSON.stringify({ jsonrpc: '2.0', id, result: { resources: [] } }) + '\n');
+        } else if (method === 'prompts/list') {
+          process.stdout.write(JSON.stringify({ jsonrpc: '2.0', id, result: { prompts: [] } }) + '\n');
         } else if (method === 'tools/call') {
           try {
             const toolResult = await this.executeTool(params.name, params.arguments || {});
