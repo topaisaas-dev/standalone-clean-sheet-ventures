@@ -2262,7 +2262,7 @@ var SERVER_INSTRUCTIONS = "TopAI Sovereign MCP Suite provides 9 deterministic, a
 var MCP_TOOLS = [
   {
     name: "agentpr_guard_audit",
-    description: "Audits unified git diffs or Pull Requests for AI-hallucinated NPM/PyPI packages, typosquatting attacks, unauthorized boundary imports, and leaked secrets. Use when verifying code changes from AI coding agents (Cursor, Claude Code, Copilot) before merging into production repositories. Do not use for general AST syntax minification (use `tokenprune_wasm_trim` instead) or container configuration analysis (use `dockerlean_wasm_audit` instead). Stateless, read-only, idempotent execution in <5ms.",
+    description: "Audits unified git diffs or Pull Requests for AI-hallucinated NPM/PyPI packages, typosquatting attacks, unauthorized boundary imports, and leaked secrets. Use when: Verifying code changes from AI coding agents (Cursor, Claude Code, Copilot) or reviewing PRs before merging into production repositories. Do not use when: Pruning TypeScript/JavaScript AST syntax or linting container Dockerfiles. Alternative: Use `tokenprune_wasm_trim` for AST prompt reduction, or `dockerlean_wasm_audit` for Dockerfile linting. Execution: Runs locally in-memory (<5ms), read-only, idempotent, zero network calls, zero telemetry, air-gapped deterministic.",
     annotations: {
       title: "Pull Request Anti-Hallucination & Security Auditor",
       readOnlyHint: true,
@@ -2284,11 +2284,34 @@ var MCP_TOOLS = [
       },
       required: ["diff"],
       additionalProperties: false
+    },
+    outputSchema: {
+      type: "object",
+      properties: {
+        report: {
+          type: "object",
+          description: "Detailed security audit findings, blocked hallucinated packages, and boundary policy results."
+        },
+        markdown: {
+          type: "string",
+          description: "Formatted Markdown audit summary suitable for PR comments."
+        },
+        hasVulnerability: {
+          type: "boolean",
+          description: "Flag indicating whether hallucinated packages or security hazards were intercepted."
+        },
+        securityNotice: {
+          type: "string",
+          description: "One-line pass/fail status verification string."
+        }
+      },
+      required: ["report", "markdown", "hasVulnerability", "securityNotice"],
+      additionalProperties: false
     }
   },
   {
     name: "tokenprune_wasm_trim",
-    description: "Prunes TypeScript and JavaScript source code using AST parsing to extract public interfaces, type signatures, and exports while collapsing method implementations into concise summaries. Saves 50%-70% of LLM context window tokens without losing structural semantic information. Use when feeding large codebase files into LLM prompts for high-level reasoning or architecture planning. Do not use for PR security auditing (use `agentpr_guard_audit` instead). Stateless, read-only, idempotent execution in <10ms.",
+    description: "Prunes TypeScript and JavaScript source code using AST parsing to extract public interfaces, type signatures, and exports while collapsing method implementations into concise summaries. Saves 50%-70% of LLM context window tokens without losing structural semantic information. Use when: Feeding large codebase files or libraries into LLM prompts for high-level architecture reasoning or planning. Do not use when: Auditing git diffs for security vulnerabilities or linting container configurations. Alternative: Use `agentpr_guard_audit` for PR security verification, or `dockerlean_wasm_audit` for container optimization. Execution: Runs locally in-memory (<10ms), read-only, idempotent, zero network calls, zero telemetry, air-gapped deterministic.",
     annotations: {
       title: "AST-Aware Token Pruning & Signature Extractor",
       readOnlyHint: true,
@@ -2314,11 +2337,38 @@ var MCP_TOOLS = [
       },
       required: ["sourceCode"],
       additionalProperties: false
+    },
+    outputSchema: {
+      type: "object",
+      properties: {
+        tokensSaved: {
+          type: "number",
+          description: "Estimated number of LLM prompt tokens saved by AST pruning."
+        },
+        savingsRatioPercent: {
+          type: "number",
+          description: "Percentage of tokens pruned from original source (0-100)."
+        },
+        prunedContent: {
+          type: "string",
+          description: "Condensed TypeScript/JavaScript content preserving signatures and interfaces."
+        },
+        estimatedCostSavingsUsd: {
+          type: "string",
+          description: "Estimated USD savings per LLM call at reference prompt rates ($3/1M tokens)."
+        },
+        roiNotice: {
+          type: "string",
+          description: "Human-readable summary of prompt efficiency gains."
+        }
+      },
+      required: ["tokensSaved", "savingsRatioPercent", "prunedContent", "estimatedCostSavingsUsd", "roiNotice"],
+      additionalProperties: false
     }
   },
   {
     name: "dockerlean_wasm_audit",
-    description: "Statically lints and audits Dockerfiles for layer bloat, cache-busting RUN ordering, root user vulnerabilities, missing multi-stage build patterns, and excessive image footprint. Use when reviewing container configurations, CI/CD pipeline Dockerfiles, or developer images to ensure lean, secure containerization. Do not use for runtime container debugging or security auditing of git commits (use `agentpr_guard_audit` instead). Stateless, read-only, idempotent execution in <5ms.",
+    description: "Statically lints and audits Dockerfiles for layer bloat, cache-busting RUN ordering, root user vulnerabilities, missing multi-stage build patterns, and excessive image footprint. Use when: Reviewing container configurations, CI/CD pipeline Dockerfiles, or developer images to minimize image size and security risks. Do not use when: Auditing git diffs or evaluating Terraform infrastructure plans. Alternative: Use `agentpr_guard_audit` for git diff security, or `terracost_blast_evaluate` for cloud infrastructure cost deltas. Execution: Runs locally in-memory (<5ms), read-only, idempotent, zero network calls, zero telemetry, air-gapped deterministic.",
     annotations: {
       title: "Dockerfile Optimization & Bloat Linter",
       readOnlyHint: true,
@@ -2340,11 +2390,30 @@ var MCP_TOOLS = [
       },
       required: ["dockerfileContent"],
       additionalProperties: false
+    },
+    outputSchema: {
+      type: "object",
+      properties: {
+        report: {
+          type: "object",
+          description: "Detailed container layer analysis, detected anti-patterns, and severity scores."
+        },
+        markdown: {
+          type: "string",
+          description: "Formatted Markdown audit report with remediation instructions."
+        },
+        efficiencyNotice: {
+          type: "string",
+          description: "Overall lean score summary (0-100 scale)."
+        }
+      },
+      required: ["report", "markdown", "efficiencyNotice"],
+      additionalProperties: false
     }
   },
   {
     name: "cidr_shield_lookup",
-    description: "Performs sub-millisecond offline Radix Trie Longest Prefix Match (LPM) on any IPv4 address to classify traffic as Datacenter/Cloud (AWS, GCP, Azure, Hetzner), VPN, Tor Exit Node, Public Proxy, or Clean Residential. Use when authenticating incoming requests, preventing bot abuse, or assessing IP risk in auth flows without third-party network API calls. Do not use for domain DNS resolution or WHOIS lookups. Stateless, read-only, idempotent lookup in <0.01ms.",
+    description: "Performs sub-millisecond offline Radix Trie Longest Prefix Match (LPM) on any IPv4 address to classify traffic as Datacenter/Cloud (AWS, GCP, Azure, Hetzner), VPN, Tor Exit Node, Public Proxy, or Clean Residential. Use when: Authenticating incoming HTTP requests, preventing bot scraping abuse, or assessing IP risk in auth flows without third-party network latency. Do not use when: Performing DNS lookups, WHOIS domain queries, or analyzing SQL databases. Alternative: Use `sqltwin_stream_anonymize` for database sanitization, or `agentpr_guard_audit` for code review. Execution: Runs locally in-memory (<0.01ms), read-only, idempotent, zero network calls, zero telemetry, air-gapped deterministic.",
     annotations: {
       title: "Zero-Latency IP Classifier & Cloud/Proxy Shield",
       readOnlyHint: true,
@@ -2366,11 +2435,38 @@ var MCP_TOOLS = [
       },
       required: ["ip"],
       additionalProperties: false
+    },
+    outputSchema: {
+      type: "object",
+      properties: {
+        ip: {
+          type: "string",
+          description: "Queried IPv4 address."
+        },
+        category: {
+          type: "string",
+          description: "Classified category: DATACENTER, VPN, TOR, PROXY, or RESIDENTIAL."
+        },
+        provider: {
+          type: "string",
+          description: "Cloud provider or hosting network name (e.g., 'AWS', 'GCP', 'Hetzner')."
+        },
+        isRisk: {
+          type: "boolean",
+          description: "True if IP matches automated, proxy, or datacenter origin."
+        },
+        confidence: {
+          type: "number",
+          description: "Classification confidence score (0.0 to 1.0)."
+        }
+      },
+      required: ["ip", "category", "provider", "isRisk", "confidence"],
+      additionalProperties: false
     }
   },
   {
     name: "terracost_blast_evaluate",
-    description: "Evaluates Terraform plan JSON output to calculate infrastructure blast radius, identify high-risk stateful resource destructions (databases, storage buckets), and compute monthly FinOps cost delta estimations. Use in CI/CD pipelines or pre-apply infrastructure reviews to prevent accidental downtime and cloud budget overruns. Do not use for linting Docker containers (use `dockerlean_wasm_audit` instead). Stateless, read-only, idempotent analysis in <10ms.",
+    description: "Evaluates Terraform plan JSON output to calculate infrastructure blast radius, identify high-risk stateful resource destructions (databases, storage buckets), and compute monthly FinOps cost delta estimations. Use when: Pre-apply CI/CD infrastructure reviews, FinOps budget validation, or assessing destruction risk before applying Terraform changes. Do not use when: Linting container configurations or evaluating test flakiness. Alternative: Use `dockerlean_wasm_audit` for container optimization, or `flaky_quarantine_analyze` for CI test stability. Execution: Runs locally in-memory (<10ms), read-only, idempotent, zero network calls, zero telemetry, air-gapped deterministic.",
     annotations: {
       title: "Terraform Blast Radius & FinOps Cost Evaluator",
       readOnlyHint: true,
@@ -2392,11 +2488,26 @@ var MCP_TOOLS = [
       },
       required: ["planJson"],
       additionalProperties: false
+    },
+    outputSchema: {
+      type: "object",
+      properties: {
+        report: {
+          type: "object",
+          description: "Detailed resource delta counts, stateful destruction alerts, and monthly cost delta."
+        },
+        markdown: {
+          type: "string",
+          description: "Formatted Markdown summary suitable for CI PR comments."
+        }
+      },
+      required: ["report", "markdown"],
+      additionalProperties: false
     }
   },
   {
     name: "pack3d_wasm_pack",
-    description: "Calculates optimal 3D carton packing arrangements for physical items using First-Fit Decreasing (FFD) and Extreme Point heuristics with full 6-axis orthogonal rotations. Computes container utilization percentage, volumetric freight weight, and unplaced items. Use for logistics optimization, e-commerce order fulfillment, and shipping carton selection. Do not use for 2D sheet nesting. Stateless, read-only, idempotent calculation in <15ms.",
+    description: "Calculates 3D physical shipping carton packing arrangements for warehouse packages and e-commerce items using First-Fit Decreasing (FFD) and Extreme Point heuristics with full 6-axis orthogonal rotations. Use when: Optimizing warehouse carton selection, freight volumetric weight calculation, and logistics order fulfillment. Do not use when: Auditing code diffs, analyzing Terraform infrastructure, or performing software security reviews. Alternative: Use `agentpr_guard_audit` for PR security audits, or `terracost_blast_evaluate` for cloud infrastructure plans. Execution: Runs locally in-memory (<15ms), read-only, idempotent, zero network calls, zero telemetry, air-gapped deterministic.",
     annotations: {
       title: "3D Extreme Point Bin Packing Optimizer",
       readOnlyHint: true,
@@ -2430,11 +2541,38 @@ var MCP_TOOLS = [
       },
       required: ["items"],
       additionalProperties: false
+    },
+    outputSchema: {
+      type: "object",
+      properties: {
+        box: {
+          type: "object",
+          description: "Target carton dimensions and maximum payload capacity."
+        },
+        fitted: {
+          type: "array",
+          description: "Placed items with coordinates (x, y, z) and rotation state."
+        },
+        unfitted: {
+          type: "array",
+          description: "Items that could not fit into the container."
+        },
+        utilizationPercent: {
+          type: "number",
+          description: "Container volume utilization percentage (0-100)."
+        },
+        totalWeightKg: {
+          type: "number",
+          description: "Total combined weight of packed items in kilograms."
+        }
+      },
+      required: ["box", "fitted", "unfitted", "utilizationPercent", "totalWeightKg"],
+      additionalProperties: false
     }
   },
   {
     name: "flaky_quarantine_analyze",
-    description: "Analyzes multiple historical JUnit XML test run reports using two-state Markov chain transition matrices to statistically separate genuinely broken tests from nondeterministic flaky tests. Generates quarantine recommendations and test stability manifests. Use in CI/CD failure triage to automatically quarantine intermittent test suites. Do not use for git diff auditing (use `agentpr_guard_audit` instead). Stateless, read-only, idempotent analysis in <10ms.",
+    description: "Analyzes multiple historical JUnit XML test run reports using two-state Markov chain transition matrices to statistically separate genuinely broken tests from nondeterministic flaky tests. Generates quarantine recommendations and test stability manifests. Use when: Triage of intermittent CI/CD pipeline failures, isolating nondeterministic test suites, and calculating test failure probability. Do not use when: Auditing unified git diffs or parsing database dumps. Alternative: Use `agentpr_guard_audit` for git security audits, or `sqltwin_stream_anonymize` for database anonymization. Execution: Runs locally in-memory (<10ms), read-only, idempotent, zero network calls, zero telemetry, air-gapped deterministic.",
     annotations: {
       title: "Markov-Chain Test Flakiness & Quarantine Manager",
       readOnlyHint: true,
@@ -2457,11 +2595,30 @@ var MCP_TOOLS = [
       },
       required: ["junitXmlReports"],
       additionalProperties: false
+    },
+    outputSchema: {
+      type: "object",
+      properties: {
+        summary: {
+          type: "object",
+          description: "Aggregated suite statistics: total tests, failure rate, and transition counts."
+        },
+        quarantinedTests: {
+          type: "array",
+          description: "List of tests classified as statistically flaky requiring quarantine."
+        },
+        stableTests: {
+          type: "array",
+          description: "List of tests verified as deterministic and reliable."
+        }
+      },
+      required: ["summary", "quarantinedTests", "stableTests"],
+      additionalProperties: false
     }
   },
   {
     name: "sqltwin_stream_anonymize",
-    description: "Streams and anonymizes PostgreSQL/MySQL database dumps replacing PII (emails, phone numbers, names, IBANs) with synthetic values using HMAC format-preserving encryption while preserving 100% of foreign key joins, relational referential integrity, and unique constraints. Use when preparing production database snapshots for staging environments or local developer machines. Do not use for SEC filing extraction (use `edgarpulse_parse_filing` instead). Stateless, deterministic, offline execution in <10ms.",
+    description: "Streams and anonymizes PostgreSQL and MySQL database dumps, replacing PII (emails, phone numbers, names, IBANs) with synthetic values using HMAC format-preserving encryption while preserving 100% of foreign key joins, relational referential integrity, and unique constraints. Use when: Preparing staging or developer test database copies from production SQL dumps without exposing real user identities. Do not use when: Parsing financial SEC EDGAR filings or classifying IP addresses. Alternative: Use `edgarpulse_parse_filing` for SEC regulatory filings, or `cidr_shield_lookup` for IP address classification. Execution: Runs locally in-memory (<10ms), deterministic, zero network calls, zero telemetry, air-gapped deterministic.",
     annotations: {
       title: "Deterministic Format-Preserving SQL Anonymizer",
       readOnlyHint: true,
@@ -2487,11 +2644,26 @@ var MCP_TOOLS = [
       },
       required: ["sqlContent"],
       additionalProperties: false
+    },
+    outputSchema: {
+      type: "object",
+      properties: {
+        rowsProcessed: {
+          type: "number",
+          description: "Total count of SQL data rows parsed and anonymized."
+        },
+        anonymizedSql: {
+          type: "string",
+          description: "Sanitized SQL content with preserved referential integrity."
+        }
+      },
+      required: ["rowsProcessed", "anonymizedSql"],
+      additionalProperties: false
     }
   },
   {
     name: "edgarpulse_parse_filing",
-    description: "Parses raw SEC Form 4 and Form 8-K XML filings to extract C-suite insider transactions, open-market cluster purchases, vesting events, and calculate quantitative managerial conviction scores. Use when tracking institutional ownership changes or corporate governance signals in financial analysis workflows. Do not use for SQL dump anonymization (use `sqltwin_stream_anonymize` instead). Stateless, read-only, idempotent extraction in <5ms.",
+    description: "Parses raw SEC Form 4 and Form 8-K XML filings to extract C-suite insider transactions, open-market cluster purchases, vesting events, and calculate quantitative managerial conviction scores. Use when: Tracking corporate executive open-market purchases, insider sentiment, and institutional governance changes in financial workflows. Do not use when: Anonymizing SQL databases or evaluating container layer bloat. Alternative: Use `sqltwin_stream_anonymize` for database sanitization, or `dockerlean_wasm_audit` for container optimization. Execution: Runs locally in-memory (<5ms), read-only, idempotent, zero network calls, zero telemetry, air-gapped deterministic.",
     annotations: {
       title: "SEC Form 4 & 8-K Insider Sentiment Analyzer",
       readOnlyHint: true,
@@ -2512,6 +2684,25 @@ var MCP_TOOLS = [
         }
       },
       required: ["filingXml"],
+      additionalProperties: false
+    },
+    outputSchema: {
+      type: "object",
+      properties: {
+        issuer: {
+          type: "string",
+          description: "Stock symbol / ticker of the reporting corporate issuer."
+        },
+        transactionsCount: {
+          type: "number",
+          description: "Number of parsed insider transaction events."
+        },
+        transactions: {
+          type: "array",
+          description: "List of parsed transaction records including shares, price, and acquisition codes."
+        }
+      },
+      required: ["issuer", "transactionsCount", "transactions"],
       additionalProperties: false
     }
   }
@@ -2643,7 +2834,7 @@ var McpServer = class {
               },
               serverInfo: {
                 name: "topai-mcp-suite",
-                version: "1.0.5"
+                version: "1.0.6"
               },
               instructions: SERVER_INSTRUCTIONS
             }
